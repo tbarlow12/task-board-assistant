@@ -1,0 +1,10 @@
+﻿policies:
+  - name: archive-done
+    type: list
+	filter:
+	  - name: done
+	children: 
+	  - type: card
+		action:
+		  - type: create
+		    params: ["Make Bed", "Work Out", "Hacker Rank"]
