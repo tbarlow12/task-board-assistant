@@ -27,7 +27,7 @@ namespace TaskBoardAssistant.Common.Services
             throw new Exception($"Couldn't find a list in {board.Name} with the name {listName}");
         }
 
-        public override IEnumerable<ITaskResource> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
+        public override async Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
         {
             switch (action.Type)
             {
@@ -45,8 +45,9 @@ namespace TaskBoardAssistant.Common.Services
             foreach(var resource in resources)
             {
                 //Not sure why this works, but without the .Result,
-                //the last card in the policy is skipped
-                var card = ((TaskList)resource).CreateCard(action).Result;
+                //the last card in the policy is ski
+                //var card = ((TaskList)resource).CreateCard(action).Result;
+                ((TaskList)resource).CreateCard(action);
             }
         }
     }

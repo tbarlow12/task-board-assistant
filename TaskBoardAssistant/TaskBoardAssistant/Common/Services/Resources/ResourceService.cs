@@ -12,7 +12,7 @@ namespace TaskBoardAssistant.Common.Services
     public abstract class ResourceService
     {
         public ServiceFactory Factory { get; set; }
-        public PolicyResult ExecutePolicy(Policy policy, IEnumerable<ITaskResource> parents = null)
+        public async Task<PolicyResult> ExecutePolicy(Policy policy, IEnumerable<ITaskResource> parents = null)
         {
             PolicyResult result = new PolicyResult();
             var resources = GetResources(policy, parents);
@@ -29,7 +29,7 @@ namespace TaskBoardAssistant.Common.Services
                 {
                     var childResourceService = Factory.GetResourceService(child.Resource);
                     result.ChildrenResults.Add(
-                        childResourceService.ExecutePolicy(child, resources)
+                        childResourceService.ExecutePolicy(child, resources).Result
                     );
                 }
             }
@@ -37,8 +37,9 @@ namespace TaskBoardAssistant.Common.Services
             {
                 foreach(var action in policy.Actions)
                 {
-                    resources = PerformAction(resources, action);
+                    resources = PerformAction(resources, action).Result;
                 }
+                await CommitResources();
                 result.ResourcesAfterActions = resources;
             }
             return result; 
@@ -67,7 +68,7 @@ namespace TaskBoardAssistant.Common.Services
             return resources;
         }
         public abstract IEnumerable<ITaskResource> GetResources(IEnumerable<ITaskResource> parents = null);
-        public abstract IEnumerable<ITaskResource> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action);
-        public abstract void CommitResources();
+        public abstract Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action);
+        public abstract Task CommitResources();
     }
 }

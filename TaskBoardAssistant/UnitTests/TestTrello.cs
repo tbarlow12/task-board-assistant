@@ -34,7 +34,7 @@ namespace UnitTests
             foreach(var p in policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p));
+                results.Add(resourceService.ExecutePolicy(p).Result);
             }
         }
 
@@ -47,7 +47,7 @@ namespace UnitTests
             foreach (var p in policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p));
+                results.Add(resourceService.ExecutePolicy(p).Result);
             }
             Assert.IsTrue(true);
         }
@@ -61,7 +61,7 @@ namespace UnitTests
             foreach (var p in policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p));
+                results.Add(resourceService.ExecutePolicy(p).Result);
             }
         }
 
@@ -74,7 +74,7 @@ namespace UnitTests
             foreach (var p in policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p));
+                results.Add(resourceService.ExecutePolicy(p).Result);
             }
         }
 
@@ -87,7 +87,7 @@ namespace UnitTests
             foreach (var p in policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p));
+                results.Add(resourceService.ExecutePolicy(p).Result);
             }
         }
 
@@ -100,7 +100,7 @@ namespace UnitTests
             foreach (var p in policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p));
+                results.Add(resourceService.ExecutePolicy(p).Result);
             }
         }
     }

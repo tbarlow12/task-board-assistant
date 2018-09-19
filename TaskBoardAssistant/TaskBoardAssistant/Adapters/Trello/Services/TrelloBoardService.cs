@@ -38,15 +38,14 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
             }
         }
 
-        public override IEnumerable<ITaskResource> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
+        public override Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
         {
             throw new NotImplementedException();
         }
 
-        public override void CommitResources()
+        public override Task CommitResources()
         {
-            Task t = TrelloProcessor.Flush();
-            while (!t.IsCompleted) { }
+            return TrelloProcessor.Flush();
         }
 
         public async override Task<ITaskResource> GetById(string id)

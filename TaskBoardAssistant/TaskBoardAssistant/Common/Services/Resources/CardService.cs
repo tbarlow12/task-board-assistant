@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using TaskBoardAssistant.Common.Models.Resources;
 using TaskBoardAssistant.Common.Models;
+using System.Threading.Tasks;
+
 
 namespace TaskBoardAssistant.Common.Services
 {
@@ -42,7 +44,7 @@ namespace TaskBoardAssistant.Common.Services
             }
         }
 
-        public override IEnumerable<ITaskResource> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
+        public override async Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
         {
             switch (action.Type)
             {
@@ -58,7 +60,6 @@ namespace TaskBoardAssistant.Common.Services
                 default:
                     throw new Exception($"The {action.Type} action is not permitted for a card");
             }
-            CommitResources();
             return resources;
         }      
     }
