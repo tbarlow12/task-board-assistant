@@ -1,0 +1,25 @@
+﻿policies:
+  - name: create-daily-tasks
+    resource: board
+    filters:
+      - name: personal
+    children:
+      - resource: list
+        filters:
+          - name: doing
+        children:
+          - resource: card
+            actions:
+              - type: create
+                name: Work Out
+                due: 9:00AM
+                labels: [today, home]
+              - type: create
+                name: Personal Study
+                due: 8:00AM
+                labels: today
+                members: tannerbarlow
+              - type: create
+                name: Hacker Rank
+                due: 8:30AM
+                labels: [today, side project]

@@ -142,24 +142,38 @@ namespace UnitTests
             Policy p1 = new Policy
             {
                 Name = "archive-done",
-                Resource = ResourceType.List,
+                Resource = ResourceType.Board,
                 Filters = new List<TaskBoardResourceFilter>
                 {
                     new TaskBoardResourceFilter
                     {
-                        Name = "done"
+                        Name = "personal"
                     }
                 },
                 Children = new List<Policy>
                 {
                     new Policy
                     {
-                        Resource = ResourceType.Card,
-                        Actions = new List<BaseAction>
+                        Resource = ResourceType.List,
+                        Filters = new List<TaskBoardResourceFilter>
                         {
-                            new BaseAction
+                            new TaskBoardResourceFilter
                             {
-                                Type = ResourceAction.Archive
+                                Name = "done"
+                            }
+                        },
+                        Children = new List<Policy>
+                        {
+                            new Policy
+                            {
+                                Resource = ResourceType.Card,
+                                Actions = new List<BaseAction>
+                                {
+                                    new BaseAction
+                                    {
+                                        Type = ResourceAction.Archive
+                                    }
+                                }
                             }
                         }
                     }
@@ -168,22 +182,37 @@ namespace UnitTests
 
             string policy =
                 @"[
-                    {
-                        ""Name"": ""archive-done"",
-                        ""Type"": ""list"",
-                        ""filters"": [{
-                            ""name"": ""done""
-                        }],
-                        ""children"": [
-                            {
-                                ""Type"": ""card"",
-                                ""actions"": [{
-                                    ""type"": ""archive""
-                                }]   
-                            }
+                  {
+                    ""Name"": ""archive-done"",
+                    ""Resource"": ""board"",
+                    ""Filters"": [
+                      {
+                        ""Name"": ""personal""
+                      }
+                    ],
+                    ""Children"": [
+                      {
+                        ""Resource"": ""list"",
+                        ""Filters"": [
+                          {
+                            ""Name"": ""done""
+                          }
                         ],
-                    }
-                ]";
+                        ""Children"": [
+                          {
+                            ""Resource"": ""card"",
+                            ""Actions"": [
+                              {
+                                ""Type"": ""archive""
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+                ";
             var policies = PolicyService.JsonFromString(policy);
             Assert.IsTrue(policies.Count == 1);
             Assert.IsTrue(policies[0].Equals(p1));
@@ -243,31 +272,46 @@ namespace UnitTests
         {
             Policy p1 = new Policy
             {
-                Name = "archive-done",
-                Resource = ResourceType.List,
+                Name = "archive-cards-in-done",
+                Resource = ResourceType.Board,
                 Filters = new List<TaskBoardResourceFilter>
                 {
                     new TaskBoardResourceFilter
                     {
-                        Name = "done"
+                        Name = "personal"
                     }
                 },
                 Children = new List<Policy>
                 {
                     new Policy
                     {
-                        Resource = ResourceType.Card,
-                        Actions = new List<BaseAction>
+                        Name = "archive-done",
+                        Resource = ResourceType.List,
+                        Filters = new List<TaskBoardResourceFilter>
                         {
-                            new BaseAction
+                            new TaskBoardResourceFilter
                             {
-                                Type = ResourceAction.Archive
+                                Name = "done"
+                            }
+                        },
+                        Children = new List<Policy>
+                        {
+                            new Policy
+                            {
+                                Resource = ResourceType.Card,
+                                Actions = new List<BaseAction>
+                                {
+                                    new BaseAction
+                                    {
+                                        Type = ResourceAction.Archive
+                                    }
+                                }
                             }
                         }
                     }
                 }
             };
-            var policies = PolicyService.YmlFromFile(ArchiveDoneYml);
+            var policies = PolicyService.YmlFromString(ArchiveDoneYml);
             Assert.IsTrue(policies.Count == 1);
             Assert.IsTrue(policies[0].Equals(p1));
         }
@@ -277,40 +321,58 @@ namespace UnitTests
         {
             Policy p1 = new Policy
             {
-                Name = "archive-done",
-                Resource = ResourceType.List,
+                Name = "archive-cards-in-done",
+                Resource = ResourceType.Board,
                 Filters = new List<TaskBoardResourceFilter>
                 {
                     new TaskBoardResourceFilter
                     {
-                        Name = "done"
+                        Name = "personal"
                     }
                 },
                 Children = new List<Policy>
                 {
                     new Policy
                     {
-                        Resource = ResourceType.Card,
-                        Actions = new List<BaseAction>
+                        Name = "archive-done",
+                        Resource = ResourceType.List,
+                        Filters = new List<TaskBoardResourceFilter>
                         {
-                            new BaseAction
+                            new TaskBoardResourceFilter
                             {
-                                Type = ResourceAction.Archive
+                                Name = "done"
+                            }
+                        },
+                        Children = new List<Policy>
+                        {
+                            new Policy
+                            {
+                                Resource = ResourceType.Card,
+                                Actions = new List<BaseAction>
+                                {
+                                    new BaseAction
+                                    {
+                                        Type = ResourceAction.Archive
+                                    }
+                                }
                             }
                         }
                     }
                 }
             };
             var policies = PolicyService.YmlFromString(@"
-                policies:
-                  - name: archive-done
-                    type: list
-	                filter:
-	                  - name: done
-	                children: 
-	                  - type: card
-		                action:
-		                  - type: archive
+                - name: archive-cards-in-done
+                  resource: board
+                  filters:
+                    - name: personal
+                  children:
+                    - resource: list
+                      filters:
+                        - name: done
+                      children:
+                        - resource: card
+                          actions:
+                            - type: archive       
             ");
             Assert.IsTrue(policies.Count == 1);
             Assert.IsTrue(policies[0].Equals(p1));

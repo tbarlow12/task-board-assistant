@@ -46,8 +46,14 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="YamlDotNet, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.5.0.1\lib\net45\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="TestPolicies\SortName.yml" />
+    <None Include="TestPolicies\SortDueDate.yml" />
     <Compile Include="TestPolicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestTrello.cs" />
@@ -58,6 +64,9 @@
     <None Include="TestPolicies\ArchiveDone.json" />
     <None Include="TestPolicies.yaml" />
     <None Include="TestPolicies\ArchiveDone.yml" />
+    <None Include="TestPolicies\InactiveCards.yml" />
+    <None Include="TestPolicies\DailyEmail.yml" />
+    <None Include="TestPolicies\CreateCards.yml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskBoardAssistant\TaskBoardAssistant.csproj">
