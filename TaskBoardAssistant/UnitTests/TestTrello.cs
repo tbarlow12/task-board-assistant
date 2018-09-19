@@ -15,11 +15,12 @@ namespace UnitTests
     public class TestTrello
     {
         public const string PolicyDirPath = "../../TestPolicies/";
+        public const string SecretsPath = "../../../../secrets.json";
 
         [TestMethod]
         public void TestGetAllBoards()
         {
-            ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
+            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
             var boardService = factory.GetBoardService();
             var resources = boardService.GetResources().ToList();
             Assert.IsTrue(resources.Count > 0);
@@ -29,7 +30,7 @@ namespace UnitTests
         public void TestArchiveDone()
         {
             var policies = PolicyService.JsonFromFile(PolicyDirPath + "ArchiveDone.json");
-            ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
+            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
             List<PolicyResult> results = new List<PolicyResult>();
             foreach(var p in policies)
             {
@@ -42,7 +43,7 @@ namespace UnitTests
         public void TestCreateCards()
         {
             var policies = PolicyService.YmlFromFile(PolicyDirPath + "CreateCards.yml");
-            ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
+            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
             List<PolicyResult> results = new List<PolicyResult>();
             foreach (var p in policies)
             {
@@ -56,7 +57,7 @@ namespace UnitTests
         public void TestDailyEmail()
         {
             var policies = PolicyService.YmlFromFile(PolicyDirPath + "DailyEmail.yml");
-            ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
+            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
             List<PolicyResult> results = new List<PolicyResult>();
             foreach (var p in policies)
             {
@@ -69,7 +70,7 @@ namespace UnitTests
         public void TestInactiveCards()
         {
             var policies = PolicyService.YmlFromFile(PolicyDirPath + "InactiveCards.yml");
-            ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
+            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
             List<PolicyResult> results = new List<PolicyResult>();
             foreach (var p in policies)
             {
@@ -82,7 +83,7 @@ namespace UnitTests
         public void TestSortDueDate()
         {
             var policies = PolicyService.YmlFromFile(PolicyDirPath + "SortDueDate.yml");
-            ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
+            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
             List<PolicyResult> results = new List<PolicyResult>();
             foreach (var p in policies)
             {
@@ -95,7 +96,7 @@ namespace UnitTests
         public void TestSortName()
         {
             var policies = PolicyService.YmlFromFile(PolicyDirPath + "SortName.yml");
-            ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
+            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
             List<PolicyResult> results = new List<PolicyResult>();
             foreach (var p in policies)
             {

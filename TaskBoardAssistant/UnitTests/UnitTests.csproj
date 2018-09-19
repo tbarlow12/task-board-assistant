@@ -60,7 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="secrets.json" />
     <None Include="TestPolicies\ArchiveDone.json" />
     <None Include="TestPolicies.yaml" />
     <None Include="TestPolicies\ArchiveDone.yml" />

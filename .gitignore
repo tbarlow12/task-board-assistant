@@ -263,5 +263,5 @@ paket-files/
 __pycache__/
 *.pyc
 
-TaskBoardAssistant/UnitTests/secrets.json
+secrets.json
 */reports.json
