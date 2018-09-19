@@ -61,7 +61,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="TestPolicies\ArchiveDone.json" />
-    <None Include="TestPolicies.yaml" />
     <None Include="TestPolicies\ArchiveDone.yml" />
     <None Include="TestPolicies\InactiveCards.yml" />
     <None Include="TestPolicies\DailyEmail.yml" />

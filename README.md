@@ -20,4 +20,4 @@ You'll need to be signed in to your Trello account and grant access for the keys
 
 From there, the tests should run fine (at least the ones that are passing at the moment).
 The test scenarios do depend on some specifically named resources in order to actually
-interact with your boards, so feel free to look at `UnitTests/TestPolicies` for those details
+interact with your boards, so feel free to look at `TaskBoardAssistant/UnitTests/TestPolicies` for those details
