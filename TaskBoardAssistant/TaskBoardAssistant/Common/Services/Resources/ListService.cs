@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskBoardAssistant.Common.Models;
 using TaskBoardAssistant.Common.Models.Resources;
 
 namespace TaskBoardAssistant.Common.Services
@@ -24,6 +25,26 @@ namespace TaskBoardAssistant.Common.Services
                     return list;
             }
             throw new Exception($"Couldn't find a list in {board.Name} with the name {listName}");
+        }
+
+        public override IEnumerable<ITaskResource> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
+        {
+            switch (action.Type)
+            {
+                case ResourceAction.AddCard:
+                    AddCard(resources, action);
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        private void AddCard(IEnumerable<ITaskResource> resources, BaseAction action)
+        {
+            foreach(var resource in resources)
+            {
+                ((TaskList)resource).CreateCard(action);
+            }
         }
     }
 }

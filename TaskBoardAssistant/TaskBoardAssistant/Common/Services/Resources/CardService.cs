@@ -52,9 +52,6 @@ namespace TaskBoardAssistant.Common.Services
                 case ResourceAction.Archive:
                     Archive(resources);
                     break;
-                case ResourceAction.Create:
-                    resources = Create(action);
-                    break;
                 case ResourceAction.Label:
                     AddLabel(resources, action);
                     break;

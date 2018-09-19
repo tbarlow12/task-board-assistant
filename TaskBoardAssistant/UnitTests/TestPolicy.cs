@@ -311,7 +311,7 @@ namespace UnitTests
                     }
                 }
             };
-            var policies = PolicyService.YmlFromString(ArchiveDoneYml);
+            var policies = PolicyService.YmlFromFile(ArchiveDoneYml);
             Assert.IsTrue(policies.Count == 1);
             Assert.IsTrue(policies[0].Equals(p1));
         }

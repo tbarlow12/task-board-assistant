@@ -26,7 +26,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestRun()
+        public void TestArchiveDone()
         {
             var policies = PolicyService.JsonFromFile(PolicyDirPath + "ArchiveDone.json");
             ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
@@ -36,7 +36,71 @@ namespace UnitTests
                 var resourceService = factory.GetResourceService(p.Resource);
                 results.Add(resourceService.ExecutePolicy(p));
             }
-            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void TestCreateCards()
+        {
+            var policies = PolicyService.YmlFromFile(PolicyDirPath + "CreateCards.yml");
+            ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
+            List<PolicyResult> results = new List<PolicyResult>();
+            foreach (var p in policies)
+            {
+                var resourceService = factory.GetResourceService(p.Resource);
+                results.Add(resourceService.ExecutePolicy(p));
+            }
+        }
+
+        [TestMethod]
+        public void TestDailyEmail()
+        {
+            var policies = PolicyService.YmlFromFile(PolicyDirPath + "DailyEmail.yml");
+            ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
+            List<PolicyResult> results = new List<PolicyResult>();
+            foreach (var p in policies)
+            {
+                var resourceService = factory.GetResourceService(p.Resource);
+                results.Add(resourceService.ExecutePolicy(p));
+            }
+        }
+
+        [TestMethod]
+        public void TestInactiveCards()
+        {
+            var policies = PolicyService.YmlFromFile(PolicyDirPath + "InactiveCards.yml");
+            ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
+            List<PolicyResult> results = new List<PolicyResult>();
+            foreach (var p in policies)
+            {
+                var resourceService = factory.GetResourceService(p.Resource);
+                results.Add(resourceService.ExecutePolicy(p));
+            }
+        }
+
+        [TestMethod]
+        public void TestSortDueDate()
+        {
+            var policies = PolicyService.YmlFromFile(PolicyDirPath + "SortDueDate.yml");
+            ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
+            List<PolicyResult> results = new List<PolicyResult>();
+            foreach (var p in policies)
+            {
+                var resourceService = factory.GetResourceService(p.Resource);
+                results.Add(resourceService.ExecutePolicy(p));
+            }
+        }
+
+        [TestMethod]
+        public void TestSortName()
+        {
+            var policies = PolicyService.YmlFromFile(PolicyDirPath + "SortName.yml");
+            ServiceFactory factory = new TrelloServiceFactory("../../secrets.json");
+            List<PolicyResult> results = new List<PolicyResult>();
+            foreach (var p in policies)
+            {
+                var resourceService = factory.GetResourceService(p.Resource);
+                results.Add(resourceService.ExecutePolicy(p));
+            }
         }
     }
 }

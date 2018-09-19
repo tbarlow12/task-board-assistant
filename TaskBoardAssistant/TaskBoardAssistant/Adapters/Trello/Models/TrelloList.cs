@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TaskBoardAssistant.Common.Models.Resources;
 using Manatee.Trello;
 using TaskBoardAssistant.Common.Models;
+using TaskBoardAssistant.Common.Services;
 
 namespace TaskBoardAssistant.Adapters.Trello.Models
 {
@@ -19,9 +20,15 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
         public override string Id => List.Id;
         public override string Name { get => List.Name; set => List.Name = value; }
         public override IEnumerable<TaskCard> Cards => GetCards().Result;
+
         public override TaskCard CreateCard(BaseAction action)
         {
-            throw new NotImplementedException();
+            List.Cards.Add(
+                action.Params["name"],
+                description: action.Params.GetValueOrDefault("desc", null),
+                position: new Position(0)
+            );
+            return new TrelloCard(List.Cards[0]);
         }
 
         public override void SortList(BaseAction action)

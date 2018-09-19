@@ -19,7 +19,7 @@ namespace TaskBoardAssistant.Common.Services
             if (policy.Filters != null)
             {
                 result.ResourcesBeforeFilters = resources;
-                resources = FilterResources(resources, policy.Filters);
+                resources = FilterResources(resources, policy.Filters).ToList();
             }
             result.ResourcesBeforeActions = resources;
             if(policy.Children != null)

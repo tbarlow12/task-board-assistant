@@ -24,7 +24,7 @@ namespace TaskBoardAssistant.Common.Models
 
     public enum ResourceAction
     {
-        Create,
+        AddCard,
         Move,
         Archive,
         Delete,

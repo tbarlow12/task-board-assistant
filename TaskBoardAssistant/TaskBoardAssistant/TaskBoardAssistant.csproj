@@ -143,6 +143,7 @@
     <Compile Include="Adapters\Trello\Services\TrelloResourceHelpers.cs" />
     <Compile Include="Adapters\Trello\TrelloConfig.cs" />
     <Compile Include="Adapters\Trello\TrelloServiceFactory.cs" />
+    <Compile Include="Common\Models\PolicyCollection.cs" />
     <Compile Include="Common\Models\Resources\TaskBoardMember.cs" />
     <Compile Include="Common\Models\Resources\TaskBoard.cs" />
     <Compile Include="Common\Models\Resources\TaskCard.cs" />
