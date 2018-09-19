@@ -50,7 +50,7 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
             var trelloList = (TrelloList)list;
             Card.List = trelloList.List;
         }
-        public override async void Archive()
+        public override void Archive()
         {
             Card.IsArchived = true;
         }
