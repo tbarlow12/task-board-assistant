@@ -58,10 +58,5 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
                 }
             }
         }
-
-        public override IEnumerable<ITaskResource> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

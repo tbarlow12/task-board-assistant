@@ -18,7 +18,7 @@ namespace TaskBoardAssistant.Common.Services
         {
             var listService = Factory.GetListService();
             var list = listService.GetList(action.Params["board"], action.Params["list"]);
-            var card = list.CreateCard(action);
+            var card = list.CreateCard(action).Result;
             yield return card;
         }
 

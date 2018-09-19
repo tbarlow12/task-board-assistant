@@ -17,7 +17,7 @@ namespace TaskBoardAssistant.Common.Models.Resources
             return nameFilter;
         }
         public abstract IEnumerable<TaskCard> Cards { get; }
-        public abstract TaskCard CreateCard(BaseAction action);
+        public abstract Task<TaskCard> CreateCard(BaseAction action);
         public abstract void SortList(BaseAction action);
     }
 }

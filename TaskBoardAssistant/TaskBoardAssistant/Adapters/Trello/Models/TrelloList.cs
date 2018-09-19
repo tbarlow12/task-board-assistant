@@ -21,13 +21,14 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
         public override string Name { get => List.Name; set => List.Name = value; }
         public override IEnumerable<TaskCard> Cards => GetCards().Result;
 
-        public override TaskCard CreateCard(BaseAction action)
+        public override async Task<TaskCard> CreateCard(BaseAction action)
         {
-            List.Cards.Add(
+            await List.Cards.Add(
                 action.Params["name"],
                 description: action.Params.GetValueOrDefault("desc", null),
                 position: new Position(0)
             );
+            await List.Cards.Refresh();
             return new TrelloCard(List.Cards[0]);
         }
 

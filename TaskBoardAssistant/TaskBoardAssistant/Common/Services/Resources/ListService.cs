@@ -37,6 +37,7 @@ namespace TaskBoardAssistant.Common.Services
                 default:
                     throw new NotImplementedException();
             }
+            return resources;
         }
 
         private void AddCard(IEnumerable<ITaskResource> resources, BaseAction action)
