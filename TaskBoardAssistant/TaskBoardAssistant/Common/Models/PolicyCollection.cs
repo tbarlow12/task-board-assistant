@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace TaskBoardAssistant.Common.Models
 {
-    class PolicyCollection
+    public class PolicyCollection
     {
-        public Service Service { get; set; }
+        public ServiceProvider Provider { get; set; }
         public List<Policy> Policies { get; set; }
     }
 
-    public enum Service
+    public enum ServiceProvider
     {
         Trello,
         Jira,

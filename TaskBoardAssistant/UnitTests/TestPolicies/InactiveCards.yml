@@ -1,4 +1,5 @@
-﻿policies:
+﻿provider: trello
+policies:
   - name: advise-old
     resource: card
     filters:

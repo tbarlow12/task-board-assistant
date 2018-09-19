@@ -213,9 +213,9 @@ namespace UnitTests
                   }
                 ]
                 ";
-            var policies = PolicyService.JsonFromString(policy);
-            Assert.IsTrue(policies.Count == 1);
-            Assert.IsTrue(policies[0].Equals(p1));
+            var collection = PolicyService.JsonFromString(policy);
+            Assert.IsTrue(collection.Policies.Count == 1);
+            Assert.IsTrue(collection.Policies[0].Equals(p1));
         }
 
         [TestMethod]
@@ -262,9 +262,9 @@ namespace UnitTests
                     }
                 }
             };
-            var policies = PolicyService.JsonFromFile(ArchiveDoneJson);
-            Assert.IsTrue(policies.Count == 1);
-            Assert.IsTrue(policies[0].Equals(p1));
+            var collection = PolicyService.JsonFromFile(ArchiveDoneJson);
+            Assert.IsTrue(collection.Policies.Count == 1);
+            Assert.IsTrue(collection.Policies[0].Equals(p1));
         }
 
         [TestMethod]
@@ -311,9 +311,9 @@ namespace UnitTests
                     }
                 }
             };
-            var policies = PolicyService.YmlFromFile(ArchiveDoneYml);
-            Assert.IsTrue(policies.Count == 1);
-            Assert.IsTrue(policies[0].Equals(p1));
+            var collection = PolicyService.YmlFromFile(ArchiveDoneYml);
+            Assert.IsTrue(collection.Policies.Count == 1);
+            Assert.IsTrue(collection.Policies[0].Equals(p1));
         }
 
         [TestMethod]
@@ -360,7 +360,7 @@ namespace UnitTests
                     }
                 }
             };
-            var policies = PolicyService.YmlFromString(@"
+            var collection = PolicyService.YmlFromString(@"
                 - name: archive-cards-in-done
                   resource: board
                   filters:
@@ -374,17 +374,17 @@ namespace UnitTests
                           actions:
                             - type: archive       
             ");
-            Assert.IsTrue(policies.Count == 1);
-            Assert.IsTrue(policies[0].Equals(p1));
+            Assert.IsTrue(collection.Policies.Count == 1);
+            Assert.IsTrue(collection.Policies[0].Equals(p1));
         }
 
         [TestMethod]
         public void JsonEqualsYml()
         {
-            var jsonPolicies = PolicyService.JsonFromFile(PolicyDirPath + "ArchiveDone.json");
-            var ymlPolicies = PolicyService.YmlFromFile(PolicyDirPath + "ArchiveDone.yml");
-            Assert.IsTrue(jsonPolicies.Count == ymlPolicies.Count && jsonPolicies.Count == 1);
-            Assert.IsTrue(jsonPolicies[0].Equals(ymlPolicies[0]));
+            var jsonCollection = PolicyService.JsonFromFile(PolicyDirPath + "ArchiveDone.json");
+            var ymlCollection = PolicyService.YmlFromFile(PolicyDirPath + "ArchiveDone.yml");
+            Assert.IsTrue(jsonCollection.Policies.Count == ymlCollection.Policies.Count && jsonCollection.Policies.Count == 1);
+            Assert.IsTrue(jsonCollection.Policies[0].Equals(ymlCollection.Policies[0]));
         }
     }
 }

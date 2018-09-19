@@ -1,4 +1,5 @@
-﻿policies:
+﻿provider: trello
+policies:
   - name: todays-tasks
     resource: list
     filters:

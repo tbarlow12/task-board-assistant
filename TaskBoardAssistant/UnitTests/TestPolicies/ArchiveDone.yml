@@ -1,12 +1,14 @@
-﻿- name: archive-cards-in-done
-  resource: board
-  filters:
-    - name: personal
-  children:
-    - resource: list
-      filters:
-        - name: done
-      children:
-        - resource: card
-          actions:
-            - type: archive       
+﻿provider: trello
+policies:
+  - name: archive-cards-in-done
+    resource: board
+    filters:
+      - name: personal
+    children:
+      - resource: list
+        filters:
+          - name: done
+        children:
+          - resource: card
+            actions:
+              - type: archive       

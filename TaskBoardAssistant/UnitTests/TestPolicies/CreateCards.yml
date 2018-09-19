@@ -1,29 +1,31 @@
-﻿- name: create-daily-tasks
-  resource: board
-  filters:
-    - name: personal
-  children:
-    - resource: list
-      filters:
-        - name: doing
-      actions:
-        - type: addcard
-          params: {
-            name: Work Out,
-            due: "today@9:00am",
-            labels: "today,home"
-          }
-        - type: addcard
-          params: {
-            name: Personal Study,
-            desc: This is a test,
-            due: "today@8:00am",
-            labels: today,
-            members: tannerbarlow
-          }      
-        - type: addcard
-          params: {
-            name: Hacker Rank,
-            due: "today@8:30am",
-            labels: "today,side project"
-          }
+﻿provider: trello
+policies:
+  - name: create-daily-tasks
+    resource: board
+    filters:
+      - name: personal
+    children:
+      - resource: list
+        filters:
+          - name: doing
+        actions:
+          - type: addcard
+            params: {
+              name: Work Out,
+              due: "today@9:00am",
+              labels: "today,home"
+            }
+          - type: addcard
+            params: {
+              name: Personal Study,
+              desc: This is a test,
+              due: "today@8:00am",
+              labels: today,
+              members: tannerbarlow
+            }      
+          - type: addcard
+            params: {
+              name: Hacker Rank,
+              due: "today@8:30am",
+              labels: "today,side project"
+            }

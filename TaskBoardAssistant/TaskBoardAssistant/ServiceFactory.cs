@@ -3,35 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaskBoardAssistant.Adapters.Trello.Services;
-using TaskBoardAssistant.Common;
-using TaskBoardAssistant.Common.Models.Resources;
 using TaskBoardAssistant.Common.Models;
-using TaskBoardAssistant.Common.Services;
+using TaskBoardAssistant.Adapters.Trello;
 
 namespace TaskBoardAssistant
 {
-    public abstract class ServiceFactory
+    public class ServiceFactory
     {
-        public ResourceService GetResourceService(ResourceType type)
+        public TaskBoardFactory GetTaskBoardFactory(ServiceProvider provider, string secretsPath)
         {
-            switch (type)
+            switch (provider)
             {
-                case ResourceType.Board:
-                    return GetBoardService();
-                case ResourceType.List:
-                    return GetListService();
-                case ResourceType.Card:
-                    return GetCardService();
-                case ResourceType.Label:
-                    return GetListService();
+                case ServiceProvider.Trello:
+                    return new TrelloServiceFactory(secretsPath);
                 default:
                     throw new NotImplementedException();
             }
         }
-        public abstract BoardService GetBoardService();
-        public abstract ListService GetListService();
-        public abstract CardService GetCardService();
-        public abstract LabelService GetLabelService();
     }
 }

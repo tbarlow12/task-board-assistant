@@ -20,7 +20,8 @@ namespace UnitTests
         [TestMethod]
         public void TestGetAllBoards()
         {
-            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
+            ServiceFactory serviceFactory = new ServiceFactory();
+            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(ServiceProvider.Trello, SecretsPath);
             var boardService = factory.GetBoardService();
             var resources = boardService.GetResources().ToList();
             Assert.IsTrue(resources.Count > 0);
@@ -29,10 +30,11 @@ namespace UnitTests
         [TestMethod]
         public void TestArchiveDone()
         {
-            var policies = PolicyService.JsonFromFile(PolicyDirPath + "ArchiveDone.json");
-            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
+            var collection = PolicyService.JsonFromFile(PolicyDirPath + "ArchiveDone.json");
+            ServiceFactory serviceFactory = new ServiceFactory();
+            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider, SecretsPath);
             List<PolicyResult> results = new List<PolicyResult>();
-            foreach(var p in policies)
+            foreach(var p in collection.Policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
                 results.Add(resourceService.ExecutePolicy(p).Result);
@@ -42,10 +44,11 @@ namespace UnitTests
         [TestMethod]
         public void TestCreateCards()
         {
-            var policies = PolicyService.YmlFromFile(PolicyDirPath + "CreateCards.yml");
-            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
+            var collection = PolicyService.YmlFromFile(PolicyDirPath + "CreateCards.yml");
+            ServiceFactory serviceFactory = new ServiceFactory();
+            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider, SecretsPath);
             List<PolicyResult> results = new List<PolicyResult>();
-            foreach (var p in policies)
+            foreach (var p in collection.Policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
                 results.Add(resourceService.ExecutePolicy(p).Result);
@@ -56,10 +59,10 @@ namespace UnitTests
         [TestMethod]
         public void TestDailyEmail()
         {
-            var policies = PolicyService.YmlFromFile(PolicyDirPath + "DailyEmail.yml");
-            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
+            var collection = PolicyService.YmlFromFile(PolicyDirPath + "DailyEmail.yml");
+            TaskBoardFactory factory = new TrelloServiceFactory(SecretsPath);
             List<PolicyResult> results = new List<PolicyResult>();
-            foreach (var p in policies)
+            foreach (var p in collection.Policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
                 results.Add(resourceService.ExecutePolicy(p).Result);
@@ -69,10 +72,11 @@ namespace UnitTests
         [TestMethod]
         public void TestInactiveCards()
         {
-            var policies = PolicyService.YmlFromFile(PolicyDirPath + "InactiveCards.yml");
-            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
+            var collection = PolicyService.YmlFromFile(PolicyDirPath + "InactiveCards.yml");
+            ServiceFactory serviceFactory = new ServiceFactory();
+            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider, SecretsPath);
             List<PolicyResult> results = new List<PolicyResult>();
-            foreach (var p in policies)
+            foreach (var p in collection.Policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
                 results.Add(resourceService.ExecutePolicy(p).Result);
@@ -82,10 +86,11 @@ namespace UnitTests
         [TestMethod]
         public void TestSortDueDate()
         {
-            var policies = PolicyService.YmlFromFile(PolicyDirPath + "SortDueDate.yml");
-            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
+            var collection = PolicyService.YmlFromFile(PolicyDirPath + "SortDueDate.yml");
+            ServiceFactory serviceFactory = new ServiceFactory();
+            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider, SecretsPath);
             List<PolicyResult> results = new List<PolicyResult>();
-            foreach (var p in policies)
+            foreach (var p in collection.Policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
                 results.Add(resourceService.ExecutePolicy(p).Result);
@@ -95,10 +100,11 @@ namespace UnitTests
         [TestMethod]
         public void TestSortName()
         {
-            var policies = PolicyService.YmlFromFile(PolicyDirPath + "SortName.yml");
-            ServiceFactory factory = new TrelloServiceFactory(SecretsPath);
+            var collection = PolicyService.YmlFromFile(PolicyDirPath + "SortName.yml");
+            ServiceFactory serviceFactory = new ServiceFactory();
+            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider, SecretsPath);
             List<PolicyResult> results = new List<PolicyResult>();
-            foreach (var p in policies)
+            foreach (var p in collection.Policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
                 results.Add(resourceService.ExecutePolicy(p).Result);

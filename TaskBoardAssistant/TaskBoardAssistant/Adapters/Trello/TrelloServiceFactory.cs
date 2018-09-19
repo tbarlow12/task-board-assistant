@@ -11,7 +11,7 @@ using TaskBoardAssistant.Common.Services;
 
 namespace TaskBoardAssistant.Adapters.Trello
 {
-    public class TrelloServiceFactory : ServiceFactory
+    public class TrelloServiceFactory : TaskBoardFactory
     {
         TrelloBoardService trelloBoardService;
         TrelloListService trelloListService;

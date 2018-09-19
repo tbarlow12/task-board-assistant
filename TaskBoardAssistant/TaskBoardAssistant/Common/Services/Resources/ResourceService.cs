@@ -11,7 +11,7 @@ namespace TaskBoardAssistant.Common.Services
 {
     public abstract class ResourceService
     {
-        public ServiceFactory Factory { get; set; }
+        public TaskBoardFactory Factory { get; set; }
         public async Task<PolicyResult> ExecutePolicy(Policy policy, IEnumerable<ITaskResource> parents = null)
         {
             PolicyResult result = new PolicyResult();
