@@ -25,9 +25,10 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
             me = trelloFactory.Me().Result;
         }
 
-        public override async void CommitResources()
+        public override void CommitResources()
         {
-            await TrelloProcessor.Flush();
+            Task t = TrelloProcessor.Flush();
+            while (!t.IsCompleted) { }
         }
 
         public async override Task<ITaskResource> GetById(string id)

@@ -20,14 +20,7 @@
             due: "8:00am",
             labels: today,
             members: tannerbarlow
-          }   
-        - type: addcard
-          params: {
-            name: Test Test Test,
-            due: "8:00am",
-            labels: today,
-            members: tannerbarlow
-          }    
+          }      
         - type: addcard
           params: {
             name: Hacker Rank,

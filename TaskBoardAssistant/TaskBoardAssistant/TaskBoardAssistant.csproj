@@ -167,8 +167,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Policies\daily.yaml" />
-    <None Include="Policies\weekly.yaml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Adapters\Jira\" />
