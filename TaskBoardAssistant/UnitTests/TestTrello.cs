@@ -49,6 +49,7 @@ namespace UnitTests
                 var resourceService = factory.GetResourceService(p.Resource);
                 results.Add(resourceService.ExecutePolicy(p));
             }
+            Assert.IsTrue(true);
         }
 
         [TestMethod]

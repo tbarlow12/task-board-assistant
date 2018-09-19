@@ -43,9 +43,9 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
             throw new NotImplementedException();
         }
 
-        public override void CommitResources()
+        public override async void CommitResources()
         {
-            TrelloProcessor.Flush();
+            await TrelloProcessor.Flush();
         }
 
         public async override Task<ITaskResource> GetById(string id)

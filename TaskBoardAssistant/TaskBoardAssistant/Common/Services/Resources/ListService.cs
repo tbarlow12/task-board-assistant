@@ -44,7 +44,9 @@ namespace TaskBoardAssistant.Common.Services
         {
             foreach(var resource in resources)
             {
-                ((TaskList)resource).CreateCard(action);
+                //Not sure why this works, but without the .Result,
+                //the last card in the policy is skipped
+                var card = ((TaskList)resource).CreateCard(action).Result;
             }
         }
     }
