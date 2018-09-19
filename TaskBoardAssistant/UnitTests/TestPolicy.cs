@@ -181,7 +181,10 @@ namespace UnitTests
             };
 
             string policy =
-                @"[
+                @"
+              {
+                ""Provider"": ""trello"",
+                ""Policies"": [
                   {
                     ""Name"": ""archive-done"",
                     ""Resource"": ""board"",
@@ -212,6 +215,7 @@ namespace UnitTests
                     ]
                   }
                 ]
+             }
                 ";
             var collection = PolicyService.JsonFromString(policy);
             Assert.IsTrue(collection.Policies.Count == 1);
@@ -361,6 +365,8 @@ namespace UnitTests
                 }
             };
             var collection = PolicyService.YmlFromString(@"
+            provider: trello
+            policies:
                 - name: archive-cards-in-done
                   resource: board
                   filters:

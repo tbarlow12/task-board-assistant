@@ -21,7 +21,7 @@ namespace TaskBoardAssistant.Adapters.Trello
         }
         public static void Initialize(string path)
         {
-            var json = File.ReadAllText("../../secrets.json");
+            var json = File.ReadAllText(path);
             var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
             Initialize(values["TRELLO_APP_KEY"], values["TRELLO_USER_TOKEN"]);
         }
