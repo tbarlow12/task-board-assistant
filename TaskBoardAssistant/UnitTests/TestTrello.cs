@@ -30,85 +30,37 @@ namespace UnitTests
         [TestMethod]
         public void TestArchiveDone()
         {
-            var collection = PolicyService.JsonFromFile(PolicyDirPath + "ArchiveDone.json");
-            ServiceFactory serviceFactory = new ServiceFactory();
-            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider, SecretsPath);
-            List<PolicyResult> results = new List<PolicyResult>();
-            foreach(var p in collection.Policies)
-            {
-                var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p).Result);
-            }
+            Assistant.Execute(PolicyDirPath + "ArchiveDone.json", SecretsPath);
         }
 
         [TestMethod]
         public void TestCreateCards()
         {
-            var collection = PolicyService.YmlFromFile(PolicyDirPath + "CreateCards.yml");
-            ServiceFactory serviceFactory = new ServiceFactory();
-            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider, SecretsPath);
-            List<PolicyResult> results = new List<PolicyResult>();
-            foreach (var p in collection.Policies)
-            {
-                var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p).Result);
-            }
-            Assert.IsTrue(true);
+            Assistant.Execute(PolicyDirPath + "CreateCards.yml", SecretsPath);
         }
 
         [TestMethod]
         public void TestDailyEmail()
         {
-            var collection = PolicyService.YmlFromFile(PolicyDirPath + "DailyEmail.yml");
-            TaskBoardFactory factory = new TrelloServiceFactory(SecretsPath);
-            List<PolicyResult> results = new List<PolicyResult>();
-            foreach (var p in collection.Policies)
-            {
-                var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p).Result);
-            }
+            Assistant.Execute(PolicyDirPath + "DailyEmail.yml", SecretsPath);
         }
 
         [TestMethod]
         public void TestInactiveCards()
         {
-            var collection = PolicyService.YmlFromFile(PolicyDirPath + "InactiveCards.yml");
-            ServiceFactory serviceFactory = new ServiceFactory();
-            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider, SecretsPath);
-            List<PolicyResult> results = new List<PolicyResult>();
-            foreach (var p in collection.Policies)
-            {
-                var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p).Result);
-            }
+            Assistant.Execute(PolicyDirPath + "InactiveCards.yml", SecretsPath);
         }
 
         [TestMethod]
         public void TestSortDueDate()
         {
-            var collection = PolicyService.YmlFromFile(PolicyDirPath + "SortDueDate.yml");
-            ServiceFactory serviceFactory = new ServiceFactory();
-            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider, SecretsPath);
-            List<PolicyResult> results = new List<PolicyResult>();
-            foreach (var p in collection.Policies)
-            {
-                var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p).Result);
-            }
+            Assistant.Execute(PolicyDirPath + "SortDueDate.yml", SecretsPath);
         }
 
         [TestMethod]
         public void TestSortName()
         {
-            var collection = PolicyService.YmlFromFile(PolicyDirPath + "SortName.yml");
-            ServiceFactory serviceFactory = new ServiceFactory();
-            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider, SecretsPath);
-            List<PolicyResult> results = new List<PolicyResult>();
-            foreach (var p in collection.Policies)
-            {
-                var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p).Result);
-            }
+            Assistant.Execute(PolicyDirPath + "SortName.yml", SecretsPath);
         }
     }
 }

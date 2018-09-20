@@ -365,8 +365,8 @@ namespace UnitTests
                 }
             };
             var collection = PolicyService.YmlFromString(@"
-            provider: trello
-            policies:
+              provider: trello
+              policies:
                 - name: archive-cards-in-done
                   resource: board
                   filters:

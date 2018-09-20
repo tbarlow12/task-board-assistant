@@ -160,6 +160,7 @@
     <Compile Include="Common\Models\PolicyResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceFactory.cs" />
+    <Compile Include="Assistant.cs" />
     <Compile Include="TaskBoardFactory.cs" />
     <Compile Include="Common\Services\Extensions.cs" />
     <Compile Include="Common\Services\Policy\PolicyService.cs" />
