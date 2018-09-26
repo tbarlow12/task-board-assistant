@@ -67,9 +67,13 @@
     <None Include="TestPolicies\CreateCards.yml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskBoardAssistant\TaskBoardAssistant.csproj">
-      <Project>{f1fbb354-3992-4cf7-8dbe-90ade4bc6be0}</Project>
-      <Name>TaskBoardAssistant</Name>
+    <ProjectReference Include="..\TaskBoardAssistant.Core\TaskBoardAssistant.Core.csproj">
+      <Project>{1efcac63-6f1d-451d-9f9c-2a2eb442fec1}</Project>
+      <Name>TaskBoardAssistant.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskBoardAssistant.Trello\TaskBoardAssistant.Trello.csproj">
+      <Project>{b7bcee7d-08bf-46d0-b692-d0ec11c54bb3}</Project>
+      <Name>TaskBoardAssistant.Trello</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

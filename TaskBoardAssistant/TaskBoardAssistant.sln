@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2011
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskBoardAssistant", "TaskBoardAssistant\TaskBoardAssistant.csproj", "{F1FBB354-3992-4CF7-8DBE-90ADE4BC6BE0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{2A991AB6-27EC-42C0-96F6-3B9AE1C5AC9F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B084C77D-674F-4EC6-BACF-79B35068F773}"
@@ -15,20 +13,34 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\secrets.json = ..\secrets.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskBoardAssistant.Core", "TaskBoardAssistant.Core\TaskBoardAssistant.Core.csproj", "{1EFCAC63-6F1D-451D-9F9C-2A2EB442FEC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskBoardAssistant.Trello", "TaskBoardAssistant.Trello\TaskBoardAssistant.Trello.csproj", "{B7BCEE7D-08BF-46D0-B692-D0EC11C54BB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskBoardAssistant.Contracts", "TaskBoardAssistant.Contracts\TaskBoardAssistant.Contracts.csproj", "{024F5CD3-CEF6-40FA-A52D-1E12A978FE70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F1FBB354-3992-4CF7-8DBE-90ADE4BC6BE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1FBB354-3992-4CF7-8DBE-90ADE4BC6BE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1FBB354-3992-4CF7-8DBE-90ADE4BC6BE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1FBB354-3992-4CF7-8DBE-90ADE4BC6BE0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2A991AB6-27EC-42C0-96F6-3B9AE1C5AC9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2A991AB6-27EC-42C0-96F6-3B9AE1C5AC9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A991AB6-27EC-42C0-96F6-3B9AE1C5AC9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A991AB6-27EC-42C0-96F6-3B9AE1C5AC9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EFCAC63-6F1D-451D-9F9C-2A2EB442FEC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EFCAC63-6F1D-451D-9F9C-2A2EB442FEC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EFCAC63-6F1D-451D-9F9C-2A2EB442FEC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EFCAC63-6F1D-451D-9F9C-2A2EB442FEC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7BCEE7D-08BF-46D0-B692-D0EC11C54BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7BCEE7D-08BF-46D0-B692-D0EC11C54BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7BCEE7D-08BF-46D0-B692-D0EC11C54BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7BCEE7D-08BF-46D0-B692-D0EC11C54BB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{024F5CD3-CEF6-40FA-A52D-1E12A978FE70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{024F5CD3-CEF6-40FA-A52D-1E12A978FE70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{024F5CD3-CEF6-40FA-A52D-1E12A978FE70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{024F5CD3-CEF6-40FA-A52D-1E12A978FE70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
