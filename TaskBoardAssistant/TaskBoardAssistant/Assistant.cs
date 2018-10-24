@@ -11,40 +11,45 @@ namespace TaskBoardAssistant
     public class Assistant
     {
         private delegate PolicyCollection PolicyLoader(string path);
-        private static PolicyLoader GetPolicyLoader(string policyPath)
+        private static PolicyCollection LoadPoliciesFromPath(string policyPath)
         {
+            PolicyLoader loader;
             if (policyPath.EndsWith(".json"))
             {
-                return new PolicyLoader(PolicyService.JsonFromFile);
+                loader = new PolicyLoader(PolicyService.JsonFromFile);
             }
             else if (policyPath.EndsWith(".yml") || policyPath.EndsWith(".yaml"))
             {
-                return new PolicyLoader(PolicyService.YmlFromFile);
+                loader = new PolicyLoader(PolicyService.YmlFromFile);
             }
             else
             {
                 throw new Exception("Invalid file type for policy. Use .json, .yml or .yaml");
             }
+            return loader(policyPath);
         }
 
-        public static IEnumerable<PolicyResult> Execute(string policyPath, string credsPath)
+        private static PolicyCollection LoadPoliciesFromBlob(string containerName, string fileName)
         {
-            var collection = GetPolicyLoader(policyPath)(policyPath);
-            ServiceFactory serviceFactory = new ServiceFactory();
-            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider, credsPath);
-            return Execute(collection, factory);
+            throw new NotImplementedException();
         }
 
-        public static IEnumerable<PolicyResult> Execute(string policyPath)
+        public static IEnumerable<PolicyResult> ExecuteFromPath(string fileName)
         {
-            var collection = GetPolicyLoader(policyPath)(policyPath);
+            var policies = LoadPoliciesFromPath(fileName);
+            return Execute(policies);
+        }
+
+        public static IEnumerable<PolicyResult> ExecuteFromBlob(string container, string fileName)
+        {
+            var policies = LoadPoliciesFromBlob(container, fileName);
+            return Execute(policies);
+        }
+
+        private static IEnumerable<PolicyResult> Execute(PolicyCollection collection)
+        {
             ServiceFactory serviceFactory = new ServiceFactory();
             TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider);
-            return Execute(collection, factory);
-        }
-
-        public static IEnumerable<PolicyResult> Execute(PolicyCollection collection, TaskBoardFactory factory)
-        {
             List<PolicyResult> results = new List<PolicyResult>();
             foreach (var p in collection.Policies)
             {

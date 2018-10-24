@@ -9,7 +9,7 @@ namespace UnitTests
     [TestClass]
     public class TestPolicy
     {
-        public const string PolicyDirPath = "../../TestPolicies/";
+        public const string PolicyDirPath = "../../Policies/";
         public const string ArchiveDoneJson = PolicyDirPath + "ArchiveDone.json";
         public const string ArchiveDoneYml = PolicyDirPath + "ArchiveDone.yml";
 

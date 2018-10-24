@@ -39,7 +39,7 @@ namespace TaskBoardAssistant.Services
                 {
                     resources = await PerformAction(resources, action);
                 }
-                await CommitResources();
+                Task.WaitAll(CommitResources());
                 result.ResourcesAfterActions = resources;
             }
             return result; 

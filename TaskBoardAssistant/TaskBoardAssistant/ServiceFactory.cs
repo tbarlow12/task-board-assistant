@@ -10,16 +10,6 @@ namespace TaskBoardAssistant
 {
     public class ServiceFactory
     {
-        public TaskBoardFactory GetTaskBoardFactory(ServiceProvider provider, string secretsPath)
-        {
-            switch (provider)
-            {
-                case ServiceProvider.Trello:
-                    return new TrelloServiceFactory(secretsPath);
-                default:
-                    throw new NotImplementedException();
-            }
-        }
 
         public TaskBoardFactory GetTaskBoardFactory(ServiceProvider provider)
         {

@@ -150,6 +150,13 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Policies\ArchiveDone.json" />
+    <None Include="Policies\ArchiveDone.yml" />
+    <None Include="Policies\CreateCards.yml" />
+    <None Include="Policies\DailyEmail.yml" />
+    <None Include="Policies\InactiveCards.yml" />
+    <None Include="Policies\SortDueDate.yml" />
+    <None Include="Policies\SortName.yml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskBoardAssistant.Core\TaskBoardAssistant.Core.csproj">
