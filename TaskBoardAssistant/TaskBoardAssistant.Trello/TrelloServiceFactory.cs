@@ -19,6 +19,11 @@ namespace TaskBoardAssistant.Trello
         TrelloCardService trelloCardService;
         TrelloLabelService trelloLabelService;
 
+        public TrelloServiceFactory()
+        {
+            TrelloConfig.Initialize();
+        }
+
         public TrelloServiceFactory(string secretsPath)
         {
             TrelloConfig.Initialize(secretsPath);

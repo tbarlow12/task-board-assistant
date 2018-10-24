@@ -32,6 +32,19 @@ namespace TaskBoardAssistant
             var collection = GetPolicyLoader(policyPath)(policyPath);
             ServiceFactory serviceFactory = new ServiceFactory();
             TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider, credsPath);
+            return Execute(collection, factory);
+        }
+
+        public static IEnumerable<PolicyResult> Execute(string policyPath)
+        {
+            var collection = GetPolicyLoader(policyPath)(policyPath);
+            ServiceFactory serviceFactory = new ServiceFactory();
+            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider);
+            return Execute(collection, factory);
+        }
+
+        public static IEnumerable<PolicyResult> Execute(PolicyCollection collection, TaskBoardFactory factory)
+        {
             List<PolicyResult> results = new List<PolicyResult>();
             foreach (var p in collection.Policies)
             {

@@ -25,5 +25,13 @@ namespace TaskBoardAssistant.Trello
             var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
             Initialize(values["TRELLO_APP_KEY"], values["TRELLO_USER_TOKEN"]);
         }
+
+        public static void Initialize()
+        {
+            Initialize(
+                Environment.GetEnvironmentVariable("TRELLO_APP_KEY"),
+                Environment.GetEnvironmentVariable("TRELLO_USER_TOKEN")
+            );
+        }
     }
 }

@@ -20,5 +20,16 @@ namespace TaskBoardAssistant
                     throw new NotImplementedException();
             }
         }
+
+        public TaskBoardFactory GetTaskBoardFactory(ServiceProvider provider)
+        {
+            switch (provider)
+            {
+                case ServiceProvider.Trello:
+                    return new TrelloServiceFactory();
+                default:
+                    throw new NotImplementedException();
+            }
+        }
     }
 }
