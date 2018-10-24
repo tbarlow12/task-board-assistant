@@ -10,7 +10,7 @@ using Manatee.Trello.WebApi;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace TaskBoardAssistant.Adapters.Trello
+namespace TaskBoardAssistant.Trello
 {
     public class TrelloConfig
     {

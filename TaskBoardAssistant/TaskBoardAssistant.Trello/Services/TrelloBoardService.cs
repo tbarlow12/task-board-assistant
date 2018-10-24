@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskBoardAssistant.Common;
-using TaskBoardAssistant.Common.Models;
-using TaskBoardAssistant.Common.Models.Resources;
-using TaskBoardAssistant.Adapters.Trello.Models;
-using TaskBoardAssistant.Common.Services;
+using TaskBoardAssistant.Models;
+using TaskBoardAssistant.Models.Resources;
+using TaskBoardAssistant.Trello.Models;
+using TaskBoardAssistant.Services;
 using Manatee;
 using Manatee.Trello;
 
@@ -15,27 +15,29 @@ namespace TaskBoardAssistant.Trello.Services
 {
     public class TrelloBoardService : BoardService
     {
-        IMe me;
-        TrelloFactory trelloFactory;
+        TrelloService trello;
 
         public TrelloBoardService(TrelloServiceFactory factory)
         {
             Factory = factory;
-            trelloFactory = new TrelloFactory();
-            me = trelloFactory.Me().Result;
+            trello = TrelloService.Instance;
         }
 
-        public override IEnumerable<ITaskResource> GetResources(IEnumerable<ITaskResource> parents = null)
+        public async override Task<ITaskResource> GetById(string id)
+        {
+            var board = trello.Factory.Board(id);
+            await board.Refresh();
+            return new TrelloBoard(board);
+        }
+
+        public override async Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null)
         {
             if(parents != null)
             {
                 throw new Exception("Boards shouldn't have parents right now");
             }
-            var boards = me.GetAllMyBoards().Result;
-            foreach(var board in boards)
-            {
-                yield return new TrelloBoard(board);
-            }
+            var boards = await trello.Me.GetAllMyBoards();
+            return boards.ToTrelloBoards();
         }
 
         public override Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
@@ -45,17 +47,10 @@ namespace TaskBoardAssistant.Trello.Services
 
         public override Task CommitResources()
         {
-            return TrelloProcessor.Flush();
+            return trello.CommitResources();
         }
 
-        public async override Task<ITaskResource> GetById(string id)
-        {
-            var board = trelloFactory.Board(id);
-            await board.Refresh();
-            return new TrelloBoard(board);
-        }
-
-        public override TaskBoard GetByName(string name)
+        public override ITaskBoard GetByName(string name)
         {
             throw new NotImplementedException();
         }

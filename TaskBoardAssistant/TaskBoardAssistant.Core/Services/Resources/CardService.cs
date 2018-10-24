@@ -13,15 +13,8 @@ namespace TaskBoardAssistant.Services
         {
             foreach(var resource in resources)
             {
-                ((TaskCard)resource).Archive();
+                ((ITaskCard)resource).Archive();
             }
-        }
-        public IEnumerable<TaskCard> Create(BaseAction action)
-        {
-            var listService = Factory.GetListService();
-            var list = listService.GetList(action.Params["board"], action.Params["list"]);
-            var card = list.CreateCard(action).Result;
-            yield return card;
         }
 
         public void Move(IEnumerable<ITaskResource> resources, BaseAction action)
@@ -30,7 +23,7 @@ namespace TaskBoardAssistant.Services
             var list = listService.GetList(action.Params["board"], action.Params["list"]);
             foreach(var resource in resources)
             {
-                ((TaskCard)resource).MoveTo(list);
+                ((ITaskCard)resource).MoveTo(list);
             }
         }
 
@@ -40,7 +33,7 @@ namespace TaskBoardAssistant.Services
             var label = labelService.GetLabel(action.Params["board"], action.Params["label"]);
             foreach(var resource in resources)
             {
-                ((TaskCard)resource).AddLabel(label);
+                ((ITaskCard)resource).AddLabel(label);
             }
         }
 

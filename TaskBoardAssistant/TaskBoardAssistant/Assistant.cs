@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaskBoardAssistant.Common.Services;
-using TaskBoardAssistant.Common.Models;
+using TaskBoardAssistant.Services;
+using TaskBoardAssistant.Models;
 
 namespace TaskBoardAssistant
 {

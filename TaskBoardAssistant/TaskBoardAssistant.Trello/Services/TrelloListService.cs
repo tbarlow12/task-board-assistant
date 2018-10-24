@@ -4,25 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskBoardAssistant.Common.Services;
-using TaskBoardAssistant.Common.Models;
-using TaskBoardAssistant.Common.Models.Resources;
+using TaskBoardAssistant.Models;
+using TaskBoardAssistant.Models.Resources;
 using Manatee.Trello;
 using TaskBoardAssistant.Trello.Models;
 using TaskBoardAssistant.Trello.Services;
-
+using TaskBoardAssistant.Services;
 
 namespace TaskBoardAssistant.Trello.Services
 {
     public class TrelloListService : ListService
     {
-        IMe me;
-        TrelloFactory trelloFactory;
+        TrelloService trello;
 
         public TrelloListService(TrelloServiceFactory factory)
         {
             Factory = factory;
-            trelloFactory = new TrelloFactory();
-            me = trelloFactory.Me().Result;
+            trello = TrelloService.Instance;
         }
 
         public override Task CommitResources()
@@ -32,30 +30,27 @@ namespace TaskBoardAssistant.Trello.Services
 
         public async override Task<ITaskResource> GetById(string id)
         {
-            var list = trelloFactory.List(id);
+            var list = trello.Factory.List(id);
             await list.Refresh();
             return new TrelloList(list);
         }
-        public override IEnumerable<ITaskResource> GetResources(IEnumerable<ITaskResource> parentResources)
+
+        public async override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parentResources)
         {
             if(parentResources == null)
             {
-                var lists = new TrelloFactory().Me().Result.GetAllMyLists();
-                foreach(var list in lists)
-                {
-                    yield return new TrelloList(list);
-                }
+                var lists = await trello.Me.GetAllMyLists();
+                return lists.ToTrelloLists();
             }
             else
             {
+                var result = new List<TrelloList>();
                 foreach(var parent in parentResources)
                 {
-                    var lists = ((TrelloBoard)parent).Board.GetBoardLists().Result;
-                    foreach(var list in lists)
-                    {
-                        yield return new TrelloList(list);
-                    }
+                    var lists = await ((TrelloBoard)parent).Board.GetBoardLists();
+                    result.AddRange(lists.ToTrelloLists());
                 }
+                return result;
             }
         }
     }

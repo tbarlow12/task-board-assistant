@@ -10,14 +10,14 @@ namespace TaskBoardAssistant.Services
 {
     public abstract class ListService : ResourceService
     {
-        public TaskList GetList(string boardName, string listName)
+        public ITaskList GetList(string boardName, string listName)
         {
             var boardService = Factory.GetBoardService();
             var board = boardService.GetByName(boardName);
             return GetList(board, listName);
         }
 
-        public TaskList GetList(TaskBoard board, string listName)
+        public ITaskList GetList(ITaskBoard board, string listName)
         {
             foreach(var list in board.Lists)
             {
@@ -44,10 +44,7 @@ namespace TaskBoardAssistant.Services
         {
             foreach(var resource in resources)
             {
-                //Not sure why this works, but without the .Result,
-                //the last card in the policy is ski
-                //var card = ((TaskList)resource).CreateCard(action).Result;
-                ((TaskList)resource).CreateCard(action);
+                ((ITaskList)resource).CreateCard(action);
             }
         }
     }

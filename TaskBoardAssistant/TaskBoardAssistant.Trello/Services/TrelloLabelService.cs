@@ -4,35 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskBoardAssistant.Common;
-using TaskBoardAssistant.Common.Models;
-using TaskBoardAssistant.Common.Models.Resources;
-using TaskBoardAssistant.Common.Services;
-using TaskBoardAssistant.Adapters.Trello.Models;
+using TaskBoardAssistant.Models;
+using TaskBoardAssistant.Models.Resources;
+using TaskBoardAssistant.Services;
+using TaskBoardAssistant.Trello.Models;
 using Manatee.Trello;
 
 namespace TaskBoardAssistant.Trello.Services
 {
     public class TrelloLabelService : LabelService
     {
-        IMe me;
-        TrelloFactory trelloFactory;
+        TrelloService trello;
 
         public TrelloLabelService(TrelloServiceFactory factory)
         {
             Factory = factory;
-            trelloFactory = new TrelloFactory();
-            me = trelloFactory.Me().Result;
+            trello = TrelloService.Instance;
         }
 
         public override Task CommitResources()
         {
-            return TrelloProcessor.Flush();
+            return trello.CommitResources();
         }
         public async override Task<ITaskResource> GetById(string id)
         {
             throw new NotImplementedException();
         }
-        public override IEnumerable<ITaskResource> GetResources(IEnumerable<ITaskResource> parents = null)
+        public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null)
         {
             throw new NotImplementedException();
         }

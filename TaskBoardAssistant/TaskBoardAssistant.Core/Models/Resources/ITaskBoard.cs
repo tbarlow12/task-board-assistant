@@ -8,13 +8,9 @@ namespace TaskBoardAssistant.Models.Resources
 {
     public interface ITaskBoard : ITaskResource
     {
-        string Id { get; }
-        string Name { get; set; }
-        bool SatisfiesFilter(TaskBoardResourceFilter filter);
-
         // PROPERTIES
-        IEnumerable<TaskList> Lists { get; }
-        IEnumerable<TaskBoardMember> Members { get; }
+        IEnumerable<ITaskList> Lists { get; }
+        IEnumerable<ITaskBoardMember> Members { get; }
         //OPERATIONS
         void Close();
         void Open();

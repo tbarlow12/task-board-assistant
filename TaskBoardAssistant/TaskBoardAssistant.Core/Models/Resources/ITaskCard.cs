@@ -10,14 +10,14 @@ namespace TaskBoardAssistant.Models.Resources
     {
         string Description { get; set; }
         DateTime? DueDate { get; set; }
-        IEnumerable<TaskLabel> Labels { get; }
+        IEnumerable<ITaskLabel> Labels { get; }
         IEnumerable<string> Comments { get; }
 
         // OPERATIONS
-        void MoveTo(TaskList list);
+        void MoveTo(ITaskList list);
         void Archive();
         void Unarchive();
         void AddComment(string comment);
-        void AddLabel(TaskLabel label);
+        void AddLabel(ITaskLabel label);
     }
 }

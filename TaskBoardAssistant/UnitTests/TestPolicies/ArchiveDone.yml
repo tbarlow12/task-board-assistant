@@ -11,4 +11,4 @@ policies:
         children:
           - resource: card
             actions:
-              - type: archive       
+              - type: archive

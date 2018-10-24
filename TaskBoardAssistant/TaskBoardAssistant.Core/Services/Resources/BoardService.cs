@@ -11,7 +11,7 @@ namespace TaskBoardAssistant.Services
 {
     public abstract class BoardService : ResourceService
     {
-        public abstract TaskBoard GetByName(string name);
+        public abstract ITaskBoard GetByName(string name);
 
         public override async Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
         {

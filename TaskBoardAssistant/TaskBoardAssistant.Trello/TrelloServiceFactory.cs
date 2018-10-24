@@ -8,6 +8,7 @@ using TaskBoardAssistant.Common;
 using TaskBoardAssistant.Trello.Services;
 using Manatee.Trello;
 using TaskBoardAssistant.Common.Services;
+using TaskBoardAssistant.Services;
 
 namespace TaskBoardAssistant.Trello
 {

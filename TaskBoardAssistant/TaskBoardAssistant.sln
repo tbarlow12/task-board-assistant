@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2011
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{2A991AB6-27EC-42C0-96F6-3B9AE1C5AC9F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B084C77D-674F-4EC6-BACF-79B35068F773}"
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
@@ -13,11 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\secrets.json = ..\secrets.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskBoardAssistant.Core", "TaskBoardAssistant.Core\TaskBoardAssistant.Core.csproj", "{1EFCAC63-6F1D-451D-9F9C-2A2EB442FEC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskBoardAssistant.Core", "TaskBoardAssistant.Core\TaskBoardAssistant.Core.csproj", "{0A7C3B6B-BD32-4AA2-B5E4-095F5F8C51DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskBoardAssistant.Trello", "TaskBoardAssistant.Trello\TaskBoardAssistant.Trello.csproj", "{B7BCEE7D-08BF-46D0-B692-D0EC11C54BB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskBoardAssistant.Trello", "TaskBoardAssistant.Trello\TaskBoardAssistant.Trello.csproj", "{D8BFA0D5-A0C0-4052-A245-B8F64C35FE2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskBoardAssistant.Contracts", "TaskBoardAssistant.Contracts\TaskBoardAssistant.Contracts.csproj", "{024F5CD3-CEF6-40FA-A52D-1E12A978FE70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskBoardAssistant", "TaskBoardAssistant\TaskBoardAssistant.csproj", "{B543646B-E4DC-4DE5-9420-49BBE2BDD6F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{D30F2827-33EF-4155-9873-6B425E0C4EE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,22 +25,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2A991AB6-27EC-42C0-96F6-3B9AE1C5AC9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A991AB6-27EC-42C0-96F6-3B9AE1C5AC9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A991AB6-27EC-42C0-96F6-3B9AE1C5AC9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A991AB6-27EC-42C0-96F6-3B9AE1C5AC9F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1EFCAC63-6F1D-451D-9F9C-2A2EB442FEC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1EFCAC63-6F1D-451D-9F9C-2A2EB442FEC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1EFCAC63-6F1D-451D-9F9C-2A2EB442FEC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1EFCAC63-6F1D-451D-9F9C-2A2EB442FEC1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B7BCEE7D-08BF-46D0-B692-D0EC11C54BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B7BCEE7D-08BF-46D0-B692-D0EC11C54BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7BCEE7D-08BF-46D0-B692-D0EC11C54BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B7BCEE7D-08BF-46D0-B692-D0EC11C54BB3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{024F5CD3-CEF6-40FA-A52D-1E12A978FE70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{024F5CD3-CEF6-40FA-A52D-1E12A978FE70}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{024F5CD3-CEF6-40FA-A52D-1E12A978FE70}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{024F5CD3-CEF6-40FA-A52D-1E12A978FE70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A7C3B6B-BD32-4AA2-B5E4-095F5F8C51DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A7C3B6B-BD32-4AA2-B5E4-095F5F8C51DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A7C3B6B-BD32-4AA2-B5E4-095F5F8C51DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A7C3B6B-BD32-4AA2-B5E4-095F5F8C51DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8BFA0D5-A0C0-4052-A245-B8F64C35FE2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8BFA0D5-A0C0-4052-A245-B8F64C35FE2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8BFA0D5-A0C0-4052-A245-B8F64C35FE2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8BFA0D5-A0C0-4052-A245-B8F64C35FE2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B543646B-E4DC-4DE5-9420-49BBE2BDD6F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B543646B-E4DC-4DE5-9420-49BBE2BDD6F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B543646B-E4DC-4DE5-9420-49BBE2BDD6F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B543646B-E4DC-4DE5-9420-49BBE2BDD6F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30F2827-33EF-4155-9873-6B425E0C4EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30F2827-33EF-4155-9873-6B425E0C4EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30F2827-33EF-4155-9873-6B425E0C4EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30F2827-33EF-4155-9873-6B425E0C4EE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

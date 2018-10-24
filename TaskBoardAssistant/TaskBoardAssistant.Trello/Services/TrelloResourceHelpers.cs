@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Manatee.Trello;
-using TaskBoardAssistant.Common.Models;
+using TaskBoardAssistant.Models;
 using TaskBoardAssistant.Trello.Models;
 using TaskBoardAssistant.Common.Services;
 
@@ -25,57 +25,40 @@ namespace TaskBoardAssistant.Trello.Services
             return boards;
         }
 
-        public static IEnumerable<IList> GetAllMyLists(this IMe me)
+        public static async Task<IEnumerable<IList>> GetAllMyLists(this IMe me)
         {
-            var boards = me.GetAllMyBoards().Result;
-            List<Task> TaskList = new List<Task>();
+            var result = new List<IList>();
+            var boards = await me.GetAllMyBoards();
             foreach(var board in boards)
             {
-                TaskList.Add(board.GetBoardLists());
+                var boardLists = await board.GetBoardLists();
+                result.AddRange(boardLists);
             }
-            Task.WaitAll(TaskList.ToArray());
-            foreach (var task in TaskList)
-            {
-                var result = ((Task<IEnumerable<IList>>)task).Result;
-                foreach (var list in result)
-                    yield return list;
-            }
+            return result;
         }
 
-        public static IEnumerable<ICard> GetAllMyCards(this IMe me)
+        public static async Task<IEnumerable<ICard>> GetAllMyCards(this IMe me)
         {
-            var lists = me.GetAllMyLists();
-            List<Task> TaskList = new List<Task>();
+            var result = new List<ICard>();
+            var lists = await me.GetAllMyLists();
             foreach(var list in lists)
             {
-                TaskList.Add(list.GetListCards());
+                var listCards = await list.GetListCards();
+                result.AddRange(listCards);
             }
-            Task.WaitAll(TaskList.ToArray());
-            foreach(var task in TaskList)
-            {
-                var result = ((Task<IEnumerable<ICard>>)task).Result;
-                foreach (var card in result)
-                    yield return card;
-            }
+            return result;
         }
 
-        public static IEnumerable<ILabel> GetAllMyLabels(this IMe me)
+        public static async Task<IEnumerable<ILabel>> GetAllMyLabels(this IMe me)
         {
-            var cards = me.GetAllMyCards();
-            List<Task> TaskList = new List<Task>();
+            var result = new List<ILabel>();
+            var cards = await me.GetAllMyCards();
             foreach(var card in cards)
             {
-                TaskList.Add(card.GetCardLabels());
+                var cardLabels = await card.GetCardLabels();
+                result.AddRange(cardLabels);
             }
-            Task.WaitAll(TaskList.ToArray());
-            foreach(var task in TaskList)
-            {
-                var result = ((Task<IEnumerable<ILabel>>)task).Result;
-                foreach(var label in result)
-                {
-                    yield return label;
-                }
-            }
+            return result;
         }
 
         public static async Task<IEnumerable<IList>> GetBoardLists(this IBoard board)
@@ -100,6 +83,7 @@ namespace TaskBoardAssistant.Trello.Services
                 await labels.Refresh();
             return labels;
         }
+
         public static IList ByName(this IListCollection lists, string name)
         {
             foreach (IList list in lists)
@@ -155,6 +139,38 @@ namespace TaskBoardAssistant.Trello.Services
         public static void Archive(this ICard card)
         {
             card.IsArchived = true;
+        }
+
+        public static IEnumerable<TrelloBoard> ToTrelloBoards(this IEnumerable<IBoard> boards)
+        {
+            foreach(var board in boards)
+            {
+                yield return new TrelloBoard(board);
+            }
+        }
+
+        public static IEnumerable<TrelloList> ToTrelloLists(this IEnumerable<IList> lists)
+        {
+            foreach(var list in lists)
+            {
+                yield return new TrelloList(list);
+            }
+        }
+
+        public static IEnumerable<TrelloCard> ToTrelloCards(this IEnumerable<ICard> cards)
+        {
+            foreach(var card in cards)
+            {
+                yield return new TrelloCard(card);
+            }
+        }
+
+        public static IEnumerable<TrelloLabel> ToTrelloLabels(this IEnumerable<ILabel> labels)
+        {
+            foreach(var label in labels)
+            {
+                yield return new TrelloLabel(label);
+            }
         }
     }
 }

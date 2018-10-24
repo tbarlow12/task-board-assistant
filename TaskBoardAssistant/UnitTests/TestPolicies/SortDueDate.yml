@@ -5,4 +5,8 @@ policies:
     filters:
       - name: to do
     actions:
-      - sort: due-asc
+      - type: sort
+        params: {
+              comp: due,
+              dir: asc
+            }

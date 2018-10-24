@@ -15,7 +15,7 @@ namespace TaskBoardAssistant.Services
         public async Task<PolicyResult> ExecutePolicy(Policy policy, IEnumerable<ITaskResource> parents = null)
         {
             PolicyResult result = new PolicyResult();
-            var resources = GetResources(policy, parents);
+            var resources = await GetResources(policy, parents);
             if (policy.Filters != null)
             {
                 result.ResourcesBeforeFilters = resources;
@@ -29,7 +29,7 @@ namespace TaskBoardAssistant.Services
                 {
                     var childResourceService = Factory.GetResourceService(child.Resource);
                     result.ChildrenResults.Add(
-                        childResourceService.ExecutePolicy(child, resources).Result
+                        await childResourceService.ExecutePolicy(child, resources)
                     );
                 }
             }
@@ -37,7 +37,7 @@ namespace TaskBoardAssistant.Services
             {
                 foreach(var action in policy.Actions)
                 {
-                    resources = PerformAction(resources, action).Result;
+                    resources = await PerformAction(resources, action);
                 }
                 await CommitResources();
                 result.ResourcesAfterActions = resources;
@@ -53,21 +53,21 @@ namespace TaskBoardAssistant.Services
                         yield return resource;
         }
         public abstract Task<ITaskResource> GetById(string id);
-        private IEnumerable<ITaskResource> GetResources(Policy policy, IEnumerable<ITaskResource> parents)
+        private async Task<IEnumerable<ITaskResource>> GetResources(Policy policy, IEnumerable<ITaskResource> parents)
         {
             IEnumerable<ITaskResource> resources;
             if (policy.Id != null)
                 resources = new List<ITaskResource>
                 {
-                    GetById(policy.Id).Result
+                    await GetById(policy.Id)
                 };
             else
             {
-                resources = GetResources(parents).ToList();
+                resources = await GetResources(parents);
             }
             return resources;
         }
-        public abstract IEnumerable<ITaskResource> GetResources(IEnumerable<ITaskResource> parents = null);
+        public abstract Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null);
         public abstract Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action);
         public abstract Task CommitResources();
     }

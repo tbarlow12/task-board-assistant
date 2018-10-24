@@ -12,20 +12,20 @@ policies:
           - type: addcard
             params: {
               name: Work Out,
-              due: "today@9:00am",
+              due: "today@9:00",
               labels: "today,home"
             }
           - type: addcard
             params: {
               name: Personal Study,
               desc: This is a test,
-              due: "today@8:00am",
+              due: "today@8:00",
               labels: today,
               members: tannerbarlow
             }      
           - type: addcard
             params: {
               name: Hacker Rank,
-              due: "today@8:30am",
+              due: "today@8:30",
               labels: "today,side project"
             }

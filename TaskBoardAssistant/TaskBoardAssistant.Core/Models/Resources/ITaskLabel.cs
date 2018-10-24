@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskBoardAssistant.Trello
+namespace TaskBoardAssistant.Models.Resources
 {
-    public class Class1
+    public interface ITaskLabel : ITaskResource
     {
     }
 }

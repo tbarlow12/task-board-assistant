@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaskBoardAssistant.Common.Services;
-using TaskBoardAssistant.Common.Models;
-using TaskBoardAssistant.Common.Models.Resources;
+using TaskBoardAssistant.Services;
+using TaskBoardAssistant.Models;
+using TaskBoardAssistant.Models.Resources;
 using Manatee.Trello;
 using TaskBoardAssistant.Trello.Models;
 using TaskBoardAssistant.Trello.Services;
@@ -14,47 +14,43 @@ namespace TaskBoardAssistant.Trello.Services
 {
     public class TrelloCardService : CardService
     {
-        IMe me;
-        TrelloFactory trelloFactory;
+        TrelloService trello;
 
         public TrelloCardService(TrelloServiceFactory factory)
         {
             Factory = factory;
-            trelloFactory = new TrelloFactory();
-            me = trelloFactory.Me().Result;
+            trello = TrelloService.Instance;
+        }
+
+        public async override Task<ITaskResource> GetById(string id)
+        {
+            var card = trello.Factory.Card(id);
+            await card.Refresh();
+            return new TrelloCard(card);
+        }
+
+        public override async Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parentResources = null)
+        {
+            if (parentResources == null)
+            {
+                var cards = await trello.Me.GetAllMyCards();
+                return cards.ToTrelloCards();
+            }
+            else
+            {
+                var result = new List<TrelloCard>();
+                foreach(var parent in parentResources)
+                {
+                    var cards = await ((TrelloList)parent).List.GetListCards();
+                    result.AddRange(cards.ToTrelloCards());
+                }
+                return result;
+            }
         }
 
         public override Task CommitResources()
         {
-            return TrelloProcessor.Flush();
-        }
-        public async override Task<ITaskResource> GetById(string id)
-        {
-            var card = trelloFactory.Card(id);
-            await card.Refresh();
-            return new TrelloCard(new Card(id));
-        }
-        public override IEnumerable<ITaskResource> GetResources(IEnumerable<ITaskResource> parentResources = null)
-        {
-            if(parentResources == null)
-            {
-                var me = new TrelloFactory().Me().Result;
-                foreach (var card in me.GetAllMyCards())
-                {
-                    yield return new TrelloCard(card);
-                }
-            }
-            else
-            {
-                foreach(var parent in parentResources)
-                {
-                    var cards = ((TrelloList)parent).List.GetListCards().Result;
-                    foreach (var card in cards)
-                    {
-                        yield return new TrelloCard(card);
-                    }
-                }
-            }
+            return trello.CommitResources();
         }
     }
 }

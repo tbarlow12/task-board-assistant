@@ -11,6 +11,7 @@ namespace TaskBoardAssistant.Models
         public string Name { get; set; }
         public string Id { get; set; }
         public bool? Archived { get; set; }
+        public bool? Closed { get; set; }
         /*
         public string Text { get; set; }
         public double? Modified { get; set; }

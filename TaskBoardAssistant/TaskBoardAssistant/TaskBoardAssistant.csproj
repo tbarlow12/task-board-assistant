@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Tanner Barlow</Authors>
+    <Description>Main entry point for managing task boards like Trello</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TaskBoardAssistant.Trello" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaskBoardAssistant.Core\TaskBoardAssistant.Core.csproj" />
+    <ProjectReference Include="..\TaskBoardAssistant.Trello\TaskBoardAssistant.Trello.csproj" />
+  </ItemGroup>
+
+</Project>

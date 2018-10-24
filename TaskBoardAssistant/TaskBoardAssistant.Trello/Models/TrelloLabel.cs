@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaskBoardAssistant.Common.Models.Resources;
+using TaskBoardAssistant.Models.Resources;
 using Manatee.Trello;
+using TaskBoardAssistant.Models;
 
 namespace TaskBoardAssistant.Trello.Models
 {
-    class TrelloLabel : TaskLabel
+    public class TrelloLabel : ITaskLabel
     {
         public TrelloLabel(ILabel label)
         {
             Label = label;
         }
         public ILabel Label { get; private set; }
-        public override string Id => Label.Id;
-        public override string Name { get => Label.Name; set => Label.Name = value; }
+
+        public string Id => Label.Id;
+
+        public string Name { get => Label.Name; set => Label.Name = value; }
+
+        public bool SatisfiesFilter(TaskBoardResourceFilter filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

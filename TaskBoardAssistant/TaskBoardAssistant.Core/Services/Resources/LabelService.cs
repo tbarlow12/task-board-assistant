@@ -10,14 +10,14 @@ namespace TaskBoardAssistant.Services
 {
     public abstract class LabelService : ResourceService
     {
-        public TaskLabel GetLabel(string boardName, string labelName)
+        public ITaskLabel GetLabel(string boardName, string labelName)
         {
             var boardService = Factory.GetBoardService();
             var board = boardService.GetByName(boardName);
             return GetLabel(board, labelName);
         }
 
-        public TaskLabel GetLabel(TaskBoard board, string labelName)
+        public ITaskLabel GetLabel(ITaskBoard board, string labelName)
         {
             throw new NotImplementedException();
         }
