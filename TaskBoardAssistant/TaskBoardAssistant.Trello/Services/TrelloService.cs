@@ -23,20 +23,11 @@ namespace TaskBoardAssistant.Trello.Services
         IMe me;
         TrelloFactory trelloFactory;
 
-        public IMe Me
+        public async Task<IMe> GetMe()
         {
-            get
-            {
-                if (me == null)
-                {
-                    me = Factory.Me().Result;
-                }
-                else
-                {
-                    Task.WaitAll(me.Refresh());
-                }
-                return me;
-            }
+            if (me == null)
+                me = await Factory.Me();
+            return me;
         }
 
         public TrelloFactory Factory

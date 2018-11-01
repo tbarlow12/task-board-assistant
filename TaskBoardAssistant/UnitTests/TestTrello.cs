@@ -9,11 +9,12 @@ using TaskBoardAssistant.Trello;
 using TaskBoardAssistant.Trello.Models;
 using TaskBoardAssistant;
 using TaskBoardAssistant.Services;
+using Manatee.Trello;
 
 namespace UnitTests
 {
     [TestClass]
-    public class TestTrello
+    public class TestTrelloIntegration
     {
         public const string PolicyDirPath = "../../Policies/";
 
@@ -27,24 +28,14 @@ namespace UnitTests
             Assert.IsTrue(boards.Count > 0);
         }
 
-        public TrelloList Doing
+        public TrelloList GetTestList()
         {
-            get
-            {
-
-            }
+            throw new NotImplementedException();
         }
 
         [TestMethod]
         public void TestArchiveDone()
         {
-            ServiceFactory serviceFactory = new ServiceFactory();
-            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(ServiceProvider.Trello);
-
-            
-            
-
-
             Assistant.ExecuteFromPath(PolicyDirPath + "ArchiveDone.json");
         }
 

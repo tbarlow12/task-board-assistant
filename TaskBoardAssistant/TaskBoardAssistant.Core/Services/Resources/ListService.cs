@@ -44,7 +44,7 @@ namespace TaskBoardAssistant.Services
         {
             foreach(var resource in resources)
             {
-                ((ITaskList)resource).CreateCard(action);
+                ((ITaskList)resource).AddCard(action);
             }
         }
     }

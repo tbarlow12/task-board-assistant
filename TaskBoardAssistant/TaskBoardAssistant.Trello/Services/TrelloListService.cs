@@ -39,7 +39,8 @@ namespace TaskBoardAssistant.Trello.Services
         {
             if(parentResources == null)
             {
-                var lists = await trello.Me.GetAllMyLists();
+                var me = await trello.GetMe();
+                var lists = await me.GetAllMyLists();
                 return lists.ToTrelloLists();
             }
             else

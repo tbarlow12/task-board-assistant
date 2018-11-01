@@ -18,10 +18,11 @@ namespace TaskBoardAssistant.Trello.Services
             var me = factory.Me();
             return me.Result;
         }
-        public static async Task<IEnumerable<IBoard>> GetAllMyBoards(this IMe me)
+        public static async Task<IEnumerable<IBoard>> GetAllMyBoards(this IMe me, bool refresh = false)
         {
             var boards = me.Boards;
-            await boards.Refresh();
+            if(refresh)
+                await boards.Refresh();
             return boards;
         }
 

@@ -36,7 +36,8 @@ namespace TaskBoardAssistant.Trello.Services
             {
                 throw new Exception("Boards shouldn't have parents right now");
             }
-            var boards = await trello.Me.GetAllMyBoards();
+            var me = await trello.GetMe();
+            var boards = await me.GetAllMyBoards();
             return boards.ToTrelloBoards();
         }
 

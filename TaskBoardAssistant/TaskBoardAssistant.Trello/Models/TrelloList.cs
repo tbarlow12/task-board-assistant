@@ -37,16 +37,21 @@ namespace TaskBoardAssistant.Trello.Models
 
         public bool Archived { get => (bool)List.IsArchived; set => List.IsArchived = value; }
 
-        public async Task CreateCard(BaseAction action)
+        public async Task AddCard(BaseAction action)
         {
             var name = action.Params.GetValueOrDefault("name");
             var desc = action.Params.GetValueOrDefault("desc");
             var due = action.Params.GetValueOrDefault("due");
+            var member = action.Params.GetValueOrDefault("members");
+            await AddCard(name, desc, due, member);
+        }
+
+        public async Task AddCard(string name, string desc = null, string due = null, string member = null)
+        {
             var dueDate = due.ToDateTime();
             if (dueDate == null)
                 dueDate = due.ToRelativeDateTime();
-            var member = action.Params.GetValueOrDefault("members");
-            await List.Cards.Add(name, description:desc, dueDate:dueDate);
+            await List.Cards.Add(name, description: desc, dueDate: dueDate);
         }
 
         public bool SatisfiesFilter(TaskBoardResourceFilter filter)

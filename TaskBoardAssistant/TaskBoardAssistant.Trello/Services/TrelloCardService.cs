@@ -33,7 +33,8 @@ namespace TaskBoardAssistant.Trello.Services
         {
             if (parentResources == null)
             {
-                var cards = await trello.Me.GetAllMyCards();
+                var me = await trello.GetMe();
+                var cards = await me.GetAllMyCards();
                 return cards.ToTrelloCards();
             }
             else

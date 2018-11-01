@@ -9,7 +9,7 @@ namespace TaskBoardAssistant.Models.Resources
     public interface ITaskList : ITaskResource
     {
         IEnumerable<ITaskCard> Cards { get; }
-        Task CreateCard(BaseAction action);
+        Task AddCard(BaseAction action);
         void SortList(BaseAction action);
     }
 }
