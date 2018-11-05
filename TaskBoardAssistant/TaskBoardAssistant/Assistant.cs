@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskBoardAssistant.Services;
 using TaskBoardAssistant.Models;
+using System.IO;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace TaskBoardAssistant
 {
@@ -29,9 +32,30 @@ namespace TaskBoardAssistant
             return loader(policyPath);
         }
 
-        private static PolicyCollection LoadPoliciesFromBlob(string containerName, string fileName)
+        private static async Task<PolicyCollection> LoadPoliciesFromBlob(string connectionString, string containerName, string fileName)
         {
-            throw new NotImplementedException();
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+            CloudBlockBlob blob = container.GetBlockBlobReference(fileName);
+            string text;
+            using (var memoryStream = new MemoryStream())
+            {
+                await blob.DownloadToStreamAsync(memoryStream);
+                text = Encoding.UTF8.GetString(memoryStream.ToArray());
+            }
+            if (fileName.ToLower().EndsWith("json"))
+            {
+                return PolicyService.JsonFromString(text);
+            }
+            else if(fileName.ToLower().EndsWith("yml") || fileName.ToLower().EndsWith("yaml"))
+            {
+                return PolicyService.YmlFromString(text);
+            }
+            else
+            {
+                throw new InvalidDataException("Invalid file extension. Make sure file ext is .json, .yml or .yaml");
+            }
         }
 
         public static IEnumerable<PolicyResult> ExecuteFromPath(string fileName)
@@ -40,9 +64,9 @@ namespace TaskBoardAssistant
             return Execute(policies);
         }
 
-        public static IEnumerable<PolicyResult> ExecuteFromBlob(string container, string fileName)
+        public static IEnumerable<PolicyResult> ExecuteFromBlob(string connectionString, string containerName, string fileName)
         {
-            var policies = LoadPoliciesFromBlob(container, fileName);
+            var policies = LoadPoliciesFromBlob(connectionString, containerName, fileName).Result;
             return Execute(policies);
         }
 

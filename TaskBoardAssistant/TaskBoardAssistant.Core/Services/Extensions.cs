@@ -37,7 +37,7 @@ namespace TaskBoardAssistant.Common.Services
             return dateOnly.Date.Add(timeOnly);
         }
 
-        public static DateTime ToDate(this string s)
+        private static DateTime GetDay(string s)
         {
             var now = DateTime.Now.Date;
             switch (s.ToLower())
@@ -63,6 +63,18 @@ namespace TaskBoardAssistant.Common.Services
                 default:
                     throw new Exception("Invalid relative date");
             }
+        }
+
+        public static DateTime ToDate(this string s)
+        {
+            if (s.Contains('+'))
+            {
+                var split = s.Split('+');
+                var day = GetDay(split[0]);
+                var plus = int.Parse(split[1]);
+                return day.AddDays(plus);
+            }
+            return GetDay(s);
         }
 
         public static TimeSpan ToTime(this string s)
