@@ -2,6 +2,7 @@ version: 1.0.{build}
 skip_tags: true
 image: Visual Studio 2017
 configuration: Release
+build.include_nuget_references: true
 dotnet_csproj:
   patch: true
   file: 'TaskBoardAssistant/TaskBoardAssistant/TaskBoardAssistant.csproj'
@@ -13,7 +14,6 @@ dotnet_csproj:
 before_build:
 - cmd: nuget restore
 build:
-  include_project_references: true
   publish_nuget: true
   verbosity: minimal
 deploy:
