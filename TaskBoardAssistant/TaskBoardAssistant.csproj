@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Tanner Barlow</Authors>
+    <Version>1.0.0</Version>
     <Description>Main entry point for managing task boards like Trello</Description>
   </PropertyGroup>
 
