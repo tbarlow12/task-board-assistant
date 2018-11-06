@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Tanner Barlow</Authors>
+    <Description>Main entry point for managing task boards like Trello</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="9.4.0" />
+    <PackageReference Include="TaskBoardAssistant.Core" Version="1.0.6" />
+    <PackageReference Include="TaskBoardAssistant.Trello" Version="1.0.2" />
+  </ItemGroup>
+
+</Project>
