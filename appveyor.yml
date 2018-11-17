@@ -1,7 +1,6 @@
 init:
   - ps: if ( ($env:APPVEYOR_REPO_BRANCH -eq 'master') -and ($env:APPVEYOR_REPO_TAG -eq $TRUE) ) { $env:APPVEYOR_BUILD_VERSION = $env:APPVEYOR_REPO_TAG_NAME }
 
-skip_tags: true
 image: Visual Studio 2017
 configuration: Release
 dotnet_csproj:
