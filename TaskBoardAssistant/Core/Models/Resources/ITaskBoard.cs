@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace TaskBoardAssistant.Core.Models.Resources
 {
@@ -10,7 +11,7 @@ namespace TaskBoardAssistant.Core.Models.Resources
         bool IsOpen { get; set; }
 
         //OPERATIONS
-        void Close();
-        void Open();
+        Task Close();
+        Task Open();
     }
 }

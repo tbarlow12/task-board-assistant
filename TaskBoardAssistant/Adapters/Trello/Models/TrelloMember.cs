@@ -1,5 +1,6 @@
 ﻿using Manatee.Trello;
 using System;
+using System.Threading.Tasks;
 using TaskBoardAssistant.Core.Models;
 using TaskBoardAssistant.Core.Models.Resources;
 
@@ -22,9 +23,9 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
 
         public string FullName => Member.FullName;
 
-        public void Rename(string newName)
+        public Task Rename(string newName)
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException("Can't rename a member");
         }
     }
 }

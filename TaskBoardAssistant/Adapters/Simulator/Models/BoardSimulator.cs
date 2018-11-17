@@ -17,22 +17,17 @@ namespace TaskBoardAssistant.Adapters.Simulators.Models
 
         public string Name { get; set ; }
 
-        public void Close()
+        public Task Close()
         {
             throw new NotImplementedException();
         }
 
-        public void Open()
+        public Task Open()
         {
             throw new NotImplementedException();
         }
 
         public Task Rename(string newName)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ITaskResource.Rename(string newName)
         {
             throw new NotImplementedException();
         }

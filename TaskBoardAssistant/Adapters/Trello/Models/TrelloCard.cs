@@ -54,41 +54,48 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
             set => Card.Name = value;
         }
 
-        public void AddComment(string comment)
+        public Task AddComment(string comment)
         {
             Card.Comments.Add(comment);
+            return Task.CompletedTask;
         }
 
-        public void AddLabel(ITaskLabel label)
+        public Task AddLabel(ITaskLabel label)
         {
             Card.Labels.Add(((TrelloLabel)label).Label);
+            return Task.CompletedTask;
         }
 
         public bool IsArchived { get => (bool) Card.IsArchived; set => Card.IsArchived = value; }
 
-        public void Archive()
+        public Task Archive()
         {
             Card.IsArchived = true;
+            return Task.CompletedTask;
         }
 
-        public void MoveTo(ITaskList list)
+        public Task MoveTo(ITaskList list)
         {
             Card.List = ((TrelloList)list).List;
+            return Task.CompletedTask;
         }
 
-        public void Unarchive()
+        public Task Unarchive()
         {
             Card.IsArchived = false;
+            return Task.CompletedTask;
         }
 
-        public void SetPosition(int i)
+        public Task SetPosition(int i)
         {
             Card.Position = i;
+            return Task.CompletedTask;
         }
 
-        public void Rename(string newName)
+        public Task Rename(string newName)
         {
             Card.Name = newName;
+            return Task.CompletedTask;
         }
     }
 }

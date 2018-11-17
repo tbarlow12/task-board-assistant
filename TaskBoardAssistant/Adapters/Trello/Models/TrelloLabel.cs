@@ -1,4 +1,5 @@
 ﻿using Manatee.Trello;
+using System.Threading.Tasks;
 using TaskBoardAssistant.Core.Models.Resources;
 
 namespace TaskBoardAssistant.Adapters.Trello.Models
@@ -15,9 +16,10 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
 
         public string Name { get => Label.Name; set => Label.Name = value; }
 
-        public void Rename(string newName)
+        public Task Rename(string newName)
         {
             Name = newName;
+            return Task.CompletedTask;
         }
     }
 }

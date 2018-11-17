@@ -14,11 +14,11 @@ namespace TaskBoardAssistant.Core.Models.Resources
         bool IsArchived { get; set; }
 
         // OPERATIONS
-        void MoveTo(ITaskList list);
-        void Archive();
-        void Unarchive();
-        void AddComment(string comment);
-        void AddLabel(ITaskLabel label);
-        void SetPosition(int i);
+        Task MoveTo(ITaskList list);
+        Task Archive();
+        Task Unarchive();
+        Task AddComment(string comment);
+        Task AddLabel(ITaskLabel label);
+        Task SetPosition(int i);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Manatee.Trello;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TaskBoardAssistant.Core.Models;
 using TaskBoardAssistant.Core.Models.Resources;
 
 namespace TaskBoardAssistant.Adapters.Trello.Models
@@ -12,7 +11,6 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
         {
             Board = board;
         }
-
         
         public IBoard Board { get; private set; }
 
@@ -47,22 +45,19 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
 
         public bool IsOpen { get => !(bool)Board.IsClosed; set => Board.IsClosed = !value; }
 
-        public void Close()
+        public Task Close()
         {
             Board.IsClosed = true;
+            return Task.CompletedTask;
         }
 
-        public void Open()
+        public Task Open()
         {
             Board.IsClosed = false;
+            return Task.CompletedTask;
         }
 
         public Task Rename(string newName)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        void ITaskResource.Rename(string newName)
         {
             throw new System.NotImplementedException();
         }

@@ -51,9 +51,10 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
             await List.Cards.Add(name, description: desc, dueDate: dueDate);
         }
 
-        public void SortList(BaseAction action)
+        public Task SortList(BaseAction action)
         {
             var cards = Cards;
+            return Task.CompletedTask;
         }
 
         Task<IEnumerable<ITaskResource>> ITaskList.AddCard(BaseAction action)
@@ -66,7 +67,7 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
             throw new System.NotImplementedException();
         }
 
-        public void Rename(string newName)
+        public Task Rename(string newName)
         {
             throw new System.NotImplementedException();
         }

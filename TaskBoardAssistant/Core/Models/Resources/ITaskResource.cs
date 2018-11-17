@@ -9,6 +9,6 @@ namespace TaskBoardAssistant.Core.Models.Resources
         string Name { get; set; }
 
         // OPERATIONS
-        void Rename(string newName);
+        Task Rename(string newName);
     }
 }
