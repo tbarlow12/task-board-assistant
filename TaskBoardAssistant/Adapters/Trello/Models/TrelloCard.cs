@@ -41,7 +41,7 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
 
         public IEnumerable<string> Comments => GetComments().Result;
 
-        private async Task<IEnumerable<string>> GetComments()
+        private Task<IEnumerable<string>> GetComments()
         {
             throw new NotImplementedException();
         }

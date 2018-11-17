@@ -16,7 +16,7 @@ namespace TaskBoardAssistant.Core.Services.Resources
             return filter.Name.IsNullOrEqualsIgnoreCase(board.Name) &&
                 filter.Open.IsNullOrEquals(board.IsOpen);
         }
-        public override async Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
+        public override Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
         {
             throw new NotImplementedException();
         }

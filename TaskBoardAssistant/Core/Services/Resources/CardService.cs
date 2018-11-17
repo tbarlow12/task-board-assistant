@@ -23,7 +23,7 @@ namespace TaskBoardAssistant.Core.Services.Resources
             var list = listService.GetList(action.Params["board"], action.Params["list"]);
             foreach(var resource in resources)
             {
-                ((ITaskCard)resource).MoveTo(list);
+                await ((ITaskCard)resource).MoveTo(list);
             }
         }
 

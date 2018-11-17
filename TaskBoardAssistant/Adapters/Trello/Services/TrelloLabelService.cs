@@ -21,7 +21,7 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
         {
             return trello.CommitResources();
         }
-        public async override Task<ITaskResource> GetById(string id)
+        public override Task<ITaskResource> GetById(string id)
         {
             throw new NotImplementedException();
         }

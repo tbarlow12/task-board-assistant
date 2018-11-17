@@ -63,13 +63,14 @@ namespace TaskBoardAssistant.Core.Services.Resources
                 await ((ITaskList)resource).AddCard(action);
             }
         }
-        private async Task Sort(IEnumerable<ITaskResource> resources, BaseAction action)
+        private Task Sort(IEnumerable<ITaskResource> resources, BaseAction action)
         {
             foreach (var resource in resources)
             {
                 IEnumerable<ITaskCard> cards = SortCards(((ITaskList)resource).Cards, action.Params);
-                await UpdatePosition(cards);
+                UpdatePosition(cards);
             }
+            return Task.CompletedTask;
         }
         private IEnumerable<ITaskCard> SortCards(IEnumerable<ITaskCard> cards, Dictionary<string, string> actionParams)
         {
@@ -101,7 +102,7 @@ namespace TaskBoardAssistant.Core.Services.Resources
                 return cards.OrderBy(c => c, customComparer);
             }
         }
-        private async Task UpdatePosition(IEnumerable<ITaskCard> cards)
+        private void UpdatePosition(IEnumerable<ITaskCard> cards)
         {
             int i = 0;
             foreach (var card in cards)
