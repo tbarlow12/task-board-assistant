@@ -15,6 +15,7 @@ namespace TaskBoardAssistant.Core.Services.Resources
             var board = boardService.GetByName(boardName);
             return GetList(board, listName);
         }
+
         public ITaskList GetList(ITaskBoard board, string listName)
         {
             foreach(var list in board.Lists)

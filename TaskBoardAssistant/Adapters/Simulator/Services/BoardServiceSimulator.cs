@@ -10,31 +10,39 @@ namespace TaskBoardAssistant.Adapters.Simulators.Services
 {
     public class BoardServiceSimulator : BoardService
     {
-        private IEnumerable<ITaskResource> boards;
-        public BoardServiceSimulator()
+        private IEnumerable<BoardSimulator> boards;
+        public BoardServiceSimulator(FactorySimulator factory)
         {
+            Factory = factory;
             boards = new List<BoardSimulator>
             {
-                new BoardSimulator
-                {
-                    Name = "Test Board 1",
-                    IsOpen = true
-                },
-                new BoardSimulator
-                {
-                    Name = "Test Board 2",
-                    IsOpen = true
-                },
-                new BoardSimulator
-                {
-                    Name = "Test Board 3",
-                    IsOpen = false
-                }
+                new BoardSimulator("Personal"),
+                new BoardSimulator("Work"),
+                new BoardSimulator("Project")
             };
+            foreach(var board in boards)
+            {
+                board.Lists = new List<ListSimulator>
+                {
+                    new ListSimulator("To Doing"),
+                    new ListSimulator("Doing"),
+                    new ListSimulator("Done")
+                };
+                foreach(var list in board.Lists)
+                {
+                    ((ListSimulator)list).Cards = new List<CardSimulator>
+                    {
+                        new CardSimulator(list, "Test Card 1"),
+                        new CardSimulator(list, "Test Card 2"),
+                        new CardSimulator(list, "Test Card 3"),
+                        new CardSimulator(list, "Test Card 4")
+                    };
+                }
+            }
         }
         public override Task CommitResources()
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
 
         public override Task<ITaskResource> GetById(string id)
@@ -44,12 +52,19 @@ namespace TaskBoardAssistant.Adapters.Simulators.Services
 
         public override ITaskBoard GetByName(string name)
         {
-            throw new NotImplementedException();
+            foreach(var board in boards)
+            {
+                if (board.Name.ToLower().Equals(name.ToLower()))
+                {
+                    return board;
+                }
+            }
+            return null;
         }
 
         public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null)
         {
-            return Task.FromResult(boards);
+            return Task.FromResult(boards as IEnumerable<ITaskResource>);
         }
     }
 }

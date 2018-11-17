@@ -11,18 +11,19 @@ namespace UnitTests
     [TestClass]
     public class TestBoardService
     {
+        FactorySimulator factory = new FactorySimulator();
+
         [TestMethod]
         public void TestFactory()
         {
-            FactorySimulator simulator = new FactorySimulator();
-            var resourceService = simulator.GetResourceService(ResourceType.Board);
+            var resourceService = factory.GetResourceService(ResourceType.Board);
             var boardService = resourceService as BoardService;
             Assert.IsNotNull(boardService);
         }
         [TestMethod]
         public void TestNameFilter()
         {
-            var boardService = new BoardServiceSimulator();
+            var boardService = factory.GetBoardService();
             var filters = new List<TaskBoardResourceFilter>
             {
                 new TaskBoardResourceFilter
@@ -38,8 +39,7 @@ namespace UnitTests
         [TestMethod]
         public void TestClosedFilter()
         {
-
-            var boardService = new BoardServiceSimulator();
+            var boardService = factory.GetBoardService();
             var filters = new List<TaskBoardResourceFilter>
             {
                 new TaskBoardResourceFilter
@@ -55,8 +55,7 @@ namespace UnitTests
         [TestMethod]
         public void TestOpenFilter()
         {
-
-            var boardService = new BoardServiceSimulator();
+            var boardService = factory.GetBoardService();
             var filters = new List<TaskBoardResourceFilter>
             {
                 new TaskBoardResourceFilter
@@ -69,5 +68,4 @@ namespace UnitTests
             Assert.AreEqual(1, filtered.Count);
         }
     }
-        
 }

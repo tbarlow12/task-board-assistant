@@ -33,6 +33,7 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
         public string Name { get => List.Name; set => List.Name = value; }
 
         public bool Archived { get => (bool)List.IsArchived; set => List.IsArchived = value; }
+        public bool IsArchived { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
         public async Task AddCard(BaseAction action)
         {
@@ -57,17 +58,17 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
             return Task.CompletedTask;
         }
 
-        Task<IEnumerable<ITaskResource>> ITaskList.AddCard(BaseAction action)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public Task<IEnumerable<ITaskResource>> Archive()
         {
             throw new System.NotImplementedException();
         }
 
         public Task Rename(string newName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        Task ITaskList.Archive()
         {
             throw new System.NotImplementedException();
         }

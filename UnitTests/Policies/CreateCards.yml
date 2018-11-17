@@ -1,4 +1,4 @@
-﻿provider: trello
+﻿provider: simulator
 policies:
   - name: create-daily-tasks
     resource: board

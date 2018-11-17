@@ -10,6 +10,7 @@ namespace TaskBoardAssistant.Core.Models
 
     public enum ServiceProvider
     {
+        Simulator,
         Trello,
         Jira,
         Planner

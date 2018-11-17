@@ -7,6 +7,8 @@ namespace TaskBoardAssistant.Core.Models.Resources
     public interface ITaskCard : ITaskResource
     {
         // PROPERTIES
+        ITaskList List { get; set; }
+        int Position { get; set; }
         string Description { get; set; }
         DateTime? DueDate { get; set; }
         IEnumerable<ITaskLabel> Labels { get; }

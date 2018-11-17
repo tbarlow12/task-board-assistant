@@ -9,22 +9,22 @@ namespace TaskBoardAssistant.Adapters.Simulators
     {
         public BoardService GetBoardService()
         {
-            return new BoardServiceSimulator();
+            return new BoardServiceSimulator(this);
         }
 
         public CardService GetCardService()
         {
-            return new CardServiceSimulator();
+            return new CardServiceSimulator(this);
         }
 
         public LabelService GetLabelService()
         {
-            return new LabelServiceSimulator();
+            return new LabelServiceSimulator(this);
         }
 
         public ListService GetListService()
         {
-            return new ListServiceSimulator();
+            return new ListServiceSimulator(this);
         }
 
         public ResourceService GetResourceService(ResourceType type)

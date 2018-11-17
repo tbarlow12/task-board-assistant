@@ -1,4 +1,4 @@
-﻿provider: trello
+﻿provider: simulator
 policies:
   - name: archive-cards-in-done
     resource: board

@@ -78,7 +78,8 @@ namespace TaskBoardAssistant
             foreach (var p in collection.Policies)
             {
                 var resourceService = factory.GetResourceService(p.Resource);
-                results.Add(resourceService.ExecutePolicy(p).Result);
+                var result = resourceService.ExecutePolicy(p).Result;
+                results.Add(result);
             }
             return results;
         }

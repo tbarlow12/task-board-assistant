@@ -137,5 +137,20 @@ namespace TaskBoardAssistant.Core.Services
         {
             return data == null || !data.Any();
         }
+
+        public static int Count<T>(this IEnumerable<T> source)
+        {
+            ICollection<T> c = source as ICollection<T>;
+            if (c != null)
+                return c.Count;
+
+            int result = 0;
+            using (IEnumerator<T> enumerator = source.GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                    result++;
+            }
+            return result;
+        }
     }
 }

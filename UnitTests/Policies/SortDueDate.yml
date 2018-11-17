@@ -1,4 +1,4 @@
-﻿provider: trello
+﻿provider: simulator
 policies:
   - name: sort-to-do
     resource: list

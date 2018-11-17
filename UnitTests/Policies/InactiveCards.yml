@@ -1,4 +1,4 @@
-﻿provider: trello
+﻿provider: simulator
 policies:
   - name: advise-old
     resource: card

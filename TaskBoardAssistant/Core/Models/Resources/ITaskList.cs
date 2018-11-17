@@ -7,10 +7,11 @@ namespace TaskBoardAssistant.Core.Models.Resources
     {
         // PROPERTIES
         IEnumerable<ITaskCard> Cards { get; }
+        bool IsArchived { get; set; }
 
         // OPERATIONS
-        Task<IEnumerable<ITaskResource>> AddCard(BaseAction action);
-        Task<IEnumerable<ITaskResource>> Archive();
+        Task AddCard(BaseAction action);
+        Task Archive();
         Task SortList(BaseAction action);
     }
 }
