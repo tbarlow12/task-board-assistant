@@ -1,0 +1,8 @@
+﻿provider: trello
+policies:
+  - name: advise-old
+    resource: card
+    filters:
+      - inactive: 30
+    actions:
+      - notify: tabarlow@microsoft.com

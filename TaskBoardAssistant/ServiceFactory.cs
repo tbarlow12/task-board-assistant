@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskBoardAssistant.Models;
-using TaskBoardAssistant.Trello;
+using TaskBoardAssistant.Core;
+using TaskBoardAssistant.Core.Models;
+using TaskBoardAssistant.Adapters.Trello;
 
 namespace TaskBoardAssistant
 {
     public class ServiceFactory
     {
 
-        public TaskBoardFactory GetTaskBoardFactory(ServiceProvider provider)
+        public ITaskBoardFactory GetTaskBoardFactory(ServiceProvider provider)
         {
             switch (provider)
             {

@@ -8,9 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Manatee.Json" Version="10.1.0" />
+    <PackageReference Include="Manatee.Trello" Version="3.4.3" />
+    <PackageReference Include="Manatee.Trello.ManateeJson" Version="2.3.0" />
     <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="9.4.0" />
-    <PackageReference Include="TaskBoardAssistant.Core" Version="1.0.6" />
-    <PackageReference Include="TaskBoardAssistant.Trello" Version="1.0.2" />
+    <PackageReference Include="YamlDotNet" Version="5.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Adapters\" />
   </ItemGroup>
 
 </Project>

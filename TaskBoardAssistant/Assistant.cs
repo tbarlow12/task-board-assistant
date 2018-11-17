@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using TaskBoardAssistant.Services;
-using TaskBoardAssistant.Models;
-using System.IO;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
+using TaskBoardAssistant.Core;
+using TaskBoardAssistant.Core.Models;
+using TaskBoardAssistant.Core.Services.Policy;
 
 namespace TaskBoardAssistant
 {
@@ -73,7 +73,7 @@ namespace TaskBoardAssistant
         private static IEnumerable<PolicyResult> Execute(PolicyCollection collection)
         {
             ServiceFactory serviceFactory = new ServiceFactory();
-            TaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider);
+            ITaskBoardFactory factory = serviceFactory.GetTaskBoardFactory(collection.Provider);
             List<PolicyResult> results = new List<PolicyResult>();
             foreach (var p in collection.Policies)
             {

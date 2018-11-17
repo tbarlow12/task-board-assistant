@@ -1,0 +1,36 @@
+﻿{
+  "Provider": "trello",
+  "Policies": [
+    {
+      "Name": "archive-cards-in-done",
+      "Resource": "board",
+      "Filters": [
+        {
+          "Name": "personal"
+        }
+      ],
+      "Children": [
+        {
+          "Resource": "list",
+          "Filters": [
+            {
+              "Name": "done"
+            }
+          ],
+          "Children": [
+            {
+              "Resource": "card",
+              "Actions": [
+                {
+                  "Type": "archive"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+

@@ -1,0 +1,31 @@
+﻿provider: trello
+policies:
+  - name: create-daily-tasks
+    resource: board
+    filters:
+      - name: personal
+    children:
+      - resource: list
+        filters:
+          - name: doing
+        actions:
+          - type: addcard
+            params: {
+              name: Work Out,
+              due: "today@9:00",
+              labels: "today,home"
+            }
+          - type: addcard
+            params: {
+              name: Personal Study,
+              desc: This is a test,
+              due: "today@8:00",
+              labels: today,
+              members: tannerbarlow
+            }      
+          - type: addcard
+            params: {
+              name: Hacker Rank,
+              due: "today@8:30",
+              labels: "today,side project"
+            }

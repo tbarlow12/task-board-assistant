@@ -1,0 +1,8 @@
+﻿provider: trello
+policies:
+  - name: todays-tasks
+    resource: list
+    filters:
+      - name: doing
+    actions:
+      - notify: tabarlow@microsoft.com

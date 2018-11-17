@@ -1,0 +1,12 @@
+﻿provider: trello
+policies:
+  - name: sort-to-do
+    resource: list
+    filters:
+      - name: to do
+    actions:
+      - type: sort
+        params: {
+              comp: name,
+              dir: desc
+            }
