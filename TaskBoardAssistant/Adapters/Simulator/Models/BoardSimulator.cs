@@ -25,9 +25,6 @@ namespace TaskBoardAssistant.Adapters.Simulators.Models
             _lists = lists;
         }
 
-
-
-
         public IEnumerable<ITaskList> Lists { get => _lists; set => _lists = value as List<ListSimulator>; }
 
         public IEnumerable<ITaskBoardMember> Members => throw new NotImplementedException();

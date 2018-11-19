@@ -9,31 +9,31 @@ namespace TaskBoardAssistant.Core.Services.Resources
 {
     public abstract class CardService : ResourceService
     {
-        public void Archive(IEnumerable<ITaskResource> resources)
+        public async Task Archive(IEnumerable<ITaskResource> resources)
         {
             foreach(var resource in resources)
             {
-                ((ITaskCard)resource).Archive();
+                await ((ITaskCard)resource).Archive();
             }
         }
 
         public async Task Move(IEnumerable<ITaskResource> resources, BaseAction action)
         {
             var listService = Factory.GetListService();
-            var list = listService.GetList(action.Params["board"], action.Params["list"]);
+            var list = await listService.GetList(action.Params["board"], action.Params["list"]);
             foreach(var resource in resources)
             {
                 await ((ITaskCard)resource).MoveTo(list);
             }
         }
 
-        public void AddLabel(IEnumerable<ITaskResource> resources, BaseAction action)
+        public async Task AddLabel(IEnumerable<ITaskResource> resources, BaseAction action)
         {
             var labelService = Factory.GetLabelService();
-            var label = labelService.GetLabel(action.Params["board"], action.Params["label"]);
+            var label = await labelService.GetLabel(action.Params["board"], action.Params["label"]);
             foreach(var resource in resources)
             {
-                ((ITaskCard)resource).AddLabel(label);
+                await ((ITaskCard)resource).AddLabel(label);
             }
         }
 
@@ -50,10 +50,10 @@ namespace TaskBoardAssistant.Core.Services.Resources
                     await Move(resources, action);
                     break;
                 case ResourceAction.Archive:
-                    Archive(resources);
+                    await Archive(resources);
                     break;
                 case ResourceAction.Label:
-                    AddLabel(resources, action);
+                    await AddLabel(resources, action);
                     break;
                 default:
                     throw new Exception($"The {action.Type} action is not permitted for a card");

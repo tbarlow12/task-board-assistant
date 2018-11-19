@@ -85,6 +85,11 @@ namespace TaskBoardAssistant.Core.Services.Resources
                 }
             }
         }
+        public Task<ITaskResource> GetFirstByName(string name, IEnumerable<ITaskResource> parents = null)
+        {
+            return Task.FromResult(GetResources(parents).Result.GetFirstByName(name));
+        }
+
 
         // ACTIONS
         public void Rename(IEnumerable<ITaskResource> resources, BaseAction action)

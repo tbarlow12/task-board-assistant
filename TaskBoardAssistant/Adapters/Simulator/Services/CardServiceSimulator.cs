@@ -4,15 +4,17 @@ using System.Threading.Tasks;
 using TaskBoardAssistant.Core.Models.Resources;
 using TaskBoardAssistant.Core.Services.Resources;
 using TaskBoardAssistant.Adapters.Simulators.Models;
+using TaskBoardAssistant.Core.Services;
 
 namespace TaskBoardAssistant.Adapters.Simulators.Services
 {
     class CardServiceSimulator : CardService
     {
-        List<CardSimulator> _cards;
+        private DataRepo data;
         public CardServiceSimulator(FactorySimulator factory)
         {
             Factory = factory;
+            data = DataRepo.Instance;
         }
         public override Task CommitResources()
         {
@@ -26,17 +28,16 @@ namespace TaskBoardAssistant.Adapters.Simulators.Services
 
         public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null)
         {
-            
-            if(parents != null)
+            IEnumerable<ITaskCard> result;
+            if(parents == null)
             {
-                var result = new List<ITaskResource>();
-                foreach(var parent in parents)
-                {
-                    result.AddRange(((ListSimulator)parent).Cards);
-                }
-                return Task.FromResult(result as IEnumerable<ITaskResource>);
+                result = data.GetAllCards();
             }
-            return Task.FromResult(_cards as IEnumerable<ITaskResource>);
+            else
+            {
+                result = ((IEnumerable<ITaskList>)parents).CardsInLists();
+            }
+            return Task.FromResult(result as IEnumerable<ITaskResource>);
         }
     }
 }

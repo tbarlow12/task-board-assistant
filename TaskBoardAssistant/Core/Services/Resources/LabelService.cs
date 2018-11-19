@@ -8,11 +8,11 @@ namespace TaskBoardAssistant.Core.Services.Resources
 {
     public abstract class LabelService : ResourceService
     {
-        public ITaskLabel GetLabel(string boardName, string labelName)
+        public async Task<ITaskLabel> GetLabel(string boardName, string labelName)
         {
             var boardService = Factory.GetBoardService();
-            var board = boardService.GetByName(boardName);
-            return GetLabel(board, labelName);
+            var board = await boardService.GetFirstByName(boardName);
+            return GetLabel(board as ITaskBoard, labelName);
         }
 
         public ITaskLabel GetLabel(ITaskBoard board, string labelName)

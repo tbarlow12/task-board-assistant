@@ -19,9 +19,11 @@ namespace TaskBoardAssistant.Adapters.Simulators.Models
             _comments = new List<string>();
             _labels = new List<ITaskLabel>();
         }
+        public CardSimulator() { }
 
-        public CardSimulator(string name, string desc, string due, string member)
+        public CardSimulator(ITaskList list, string name, string desc, string due, string member)
         {
+            List = list;
             Name = name;
             Description = desc;
             DueDate = due.ToDateTime();
@@ -30,9 +32,7 @@ namespace TaskBoardAssistant.Adapters.Simulators.Models
         }
         public string Description { get; set; }
         public DateTime? DueDate { get; set; }
-
         public IEnumerable<ITaskLabel> Labels => _labels;
-
         public IEnumerable<string> Comments => _comments;
         public bool IsArchived { get; set; }
         public ITaskList List { get; set; }

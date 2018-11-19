@@ -52,10 +52,5 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
         {
             return trello.CommitResources();
         }
-
-        public override ITaskBoard GetByName(string name)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

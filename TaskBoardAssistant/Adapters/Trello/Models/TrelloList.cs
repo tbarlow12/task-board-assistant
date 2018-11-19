@@ -72,5 +72,10 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
         {
             throw new System.NotImplementedException();
         }
+
+        public Task AddCard(string name, string desc = null, string due = null, string member = null, bool is_archived = false)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

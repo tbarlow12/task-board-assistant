@@ -9,7 +9,6 @@ namespace TaskBoardAssistant.Core.Services.Resources
 {
     public abstract class BoardService : ResourceService
     {
-        public abstract ITaskBoard GetByName(string name);
         public override bool SatisfiesFilter(ITaskResource resource, TaskBoardResourceFilter filter)
         {
             var board = (ITaskBoard)resource;

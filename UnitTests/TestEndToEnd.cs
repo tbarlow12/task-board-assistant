@@ -15,7 +15,7 @@ namespace UnitTests
         public void TestArchivePolicy()
         {
             var listService = factory.GetListService();
-            var list = listService.GetList("personal", "done");
+            var list = listService.GetList("personal", "done").Result;
             foreach(var card in list.Cards)
             {
                 Assert.IsFalse(card.IsArchived);

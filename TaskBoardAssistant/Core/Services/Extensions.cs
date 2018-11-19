@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TaskBoardAssistant.Core.Models.Resources;
 
 namespace TaskBoardAssistant.Core.Services
 {
@@ -126,10 +127,20 @@ namespace TaskBoardAssistant.Core.Services
             return 0;
         }
 
+        public static DateTime? ToDateTimeOrRelative(this string s)
+        {
+            if (s == null)
+                return null;
+            var dt = s.ToDateTime();
+            if (dt == null)
+                dt = s.ToRelativeDateTime();
+            return dt;
+        }
         public static DateTime? ToDateTime(this string s)
         {
             if (DateTime.TryParse(s, out DateTime result))
                 return result;
+
             return null;
         }
 
@@ -151,6 +162,58 @@ namespace TaskBoardAssistant.Core.Services
                     result++;
             }
             return result;
+        }
+
+        public static IEnumerable<ITaskList> ListsInBoards(this IEnumerable<ITaskBoard> boards)
+        {
+            var result = new List<ITaskList>();
+            foreach(var board in boards)
+            {
+                result.AddRange(board.Lists);
+            }
+            return result;
+        }
+
+        public static IEnumerable<ITaskCard> CardsInLists(this IEnumerable<ITaskList> lists)
+        {
+            var result = new List<ITaskCard>();
+            foreach (var list in lists)
+            {
+                result.AddRange(list.Cards);
+            }
+            return result;
+        }
+
+        public static IEnumerable<ITaskLabel> LabelsInCards(this IEnumerable<ITaskCard> cards)
+        {
+            var result = new List<ITaskLabel>();
+            foreach (var card in cards)
+            {
+                result.AddRange(card.Labels);
+            }
+            return result;
+        }
+
+        public static IEnumerable<ITaskResource> GetByName(this IEnumerable<ITaskResource> resources, string name, bool case_sensitive=false)
+        {
+            var result = new List<ITaskResource>();
+            string targetName = (case_sensitive) ? name : name.ToLower();
+            foreach(var resource in resources)
+            {
+                if(targetName.Equals((case_sensitive) ? resource.Name : resource.Name.ToLower()))
+                {
+                    yield return resource;
+                }
+            }
+        }
+
+        public static ITaskResource GetFirstByName(this IEnumerable<ITaskResource> resources, string name, bool case_sensitive = false)
+        {
+            foreach(var resource in resources.GetByName(name, case_sensitive))
+            {
+                return resource;
+            }
+            throw new InvalidOperationException("No resource by the name: " + name);
         }
     }
 }

@@ -1,24 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TaskBoardAssistant.Adapters.Simulators.Models;
 using TaskBoardAssistant.Core.Models.Resources;
 using TaskBoardAssistant.Core.Services.Resources;
-using TaskBoardAssistant.Adapters.Simulators.Models;
+using TaskBoardAssistant.Core.Services;
 
 namespace TaskBoardAssistant.Adapters.Simulators.Services
 {
     class ListServiceSimulator : ListService
     {
-        private List<ListSimulator> lists;
+        private DataRepo data;
         public ListServiceSimulator(FactorySimulator factory)
         {
             Factory = factory;
-            lists = new List<ListSimulator>
-            {
-                new ListSimulator("To Doing"),
-                new ListSimulator("Doing"),
-                new ListSimulator("Done")
-            };
+            data = DataRepo.Instance;
         }
         public override Task CommitResources()
         {
@@ -32,7 +28,16 @@ namespace TaskBoardAssistant.Adapters.Simulators.Services
 
         public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null)
         {
-            return Task.FromResult(lists as IEnumerable<ITaskResource>);
+            IEnumerable<ITaskList> result;
+            if(parents == null)
+            {
+                result = data.GetAllLists();
+            }
+            else
+            {
+                result = ((IEnumerable<ITaskBoard>)parents).ListsInBoards();
+            }
+            return Task.FromResult(result as IEnumerable<ITaskResource>);
         }
     }
 }

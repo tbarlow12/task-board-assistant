@@ -28,7 +28,7 @@ namespace UnitTests
             {
                 new TaskBoardResourceFilter
                 {
-                    Name = "Test Board 1"
+                    Name = "Personal"
                 }
             };
             var boards = boardService.GetResources().Result;

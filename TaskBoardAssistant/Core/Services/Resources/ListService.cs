@@ -9,11 +9,11 @@ namespace TaskBoardAssistant.Core.Services.Resources
 {
     public abstract class ListService : ResourceService
     {
-        public ITaskList GetList(string boardName, string listName)
+        public async Task<ITaskList> GetList(string boardName, string listName)
         {
             var boardService = Factory.GetBoardService();
-            var board = boardService.GetByName(boardName);
-            return GetList(board, listName);
+            var board = await boardService.GetFirstByName(boardName);
+            return GetList(board as ITaskBoard, listName);
         }
 
         public ITaskList GetList(ITaskBoard board, string listName)

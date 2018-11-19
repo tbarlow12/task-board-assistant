@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TaskBoardAssistant.Core.Models.Resources;
 using TaskBoardAssistant.Core.Services.Resources;
-using TaskBoardAssistant.Adapters.Simulators.Models;
+using TaskBoardAssistant.Core.Services;
 
 namespace TaskBoardAssistant.Adapters.Simulators.Services
 {
     class LabelServiceSimulator : LabelService
     {
-        List<LabelSimulator> _labels;
+        private DataRepo data;
         public LabelServiceSimulator(FactorySimulator factory)
         {
             Factory = factory;
+            data = DataRepo.Instance;
         }
         public override Task CommitResources()
         {
@@ -26,7 +27,16 @@ namespace TaskBoardAssistant.Adapters.Simulators.Services
 
         public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null)
         {
-            return Task.FromResult(_labels as IEnumerable<ITaskResource>);
+            IEnumerable<ITaskLabel> result;
+            if(parents == null)
+            {
+                result = data.GetAllLabels();
+            }
+            else
+            {
+                result = ((IEnumerable<ITaskCard>)parents).LabelsInCards();
+            }
+            return Task.FromResult(result as IEnumerable<ITaskResource>);
         }
     }
 }
