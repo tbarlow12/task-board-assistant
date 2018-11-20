@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TaskBoardAssistant.Core.Models.Resources;
+using Newtonsoft.Json;
 
 namespace TaskBoardAssistant.Core.Services
 {
@@ -214,6 +215,20 @@ namespace TaskBoardAssistant.Core.Services
                 return resource;
             }
             throw new InvalidOperationException("No resource by the name: " + name);
+        }
+
+        public static TChild CastToChild<TParent, TChild>(this TParent parent)
+        {
+            var serializedParent = JsonConvert.SerializeObject(parent);
+            return JsonConvert.DeserializeObject<TChild>(serializedParent);
+        }
+
+        public static IEnumerable<TChild> CastIEnumerableToChild<TParent, TChild>(this IEnumerable<TParent> parents)
+        {
+            foreach(var parent in parents)
+            {
+                yield return parent.CastToChild<TParent, TChild>();
+            }
         }
     }
 }

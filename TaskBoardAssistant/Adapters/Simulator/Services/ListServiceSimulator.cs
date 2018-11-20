@@ -35,7 +35,8 @@ namespace TaskBoardAssistant.Adapters.Simulators.Services
             }
             else
             {
-                result = ((IEnumerable<ITaskBoard>)parents).ListsInBoards();
+                var boards = parents.CastIEnumerableToChild<ITaskResource, ITaskBoard>();
+                result = boards.ListsInBoards();
             }
             return Task.FromResult(result as IEnumerable<ITaskResource>);
         }
