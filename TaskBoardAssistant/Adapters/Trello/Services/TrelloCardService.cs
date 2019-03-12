@@ -12,7 +12,7 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
     {
         TrelloService trello;
 
-        private static readonly Lazy<TrelloCardService> lazy = new Lazy<TrelloCardService>();
+        private static readonly Lazy<TrelloCardService> lazy = new Lazy<TrelloCardService>(() => new TrelloCardService());
 
         public static TrelloCardService Instance { get => lazy.Value; }
 

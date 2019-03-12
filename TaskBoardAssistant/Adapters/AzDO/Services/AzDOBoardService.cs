@@ -12,7 +12,7 @@ namespace TaskBoardAssistant.Adapters.AzDO.Services
     {
         AzDOService github;
 
-        private static readonly Lazy<AzDOBoardService> lazy = new Lazy<AzDOBoardService>();
+        private static readonly Lazy<AzDOBoardService> lazy = new Lazy<AzDOBoardService>(() => new AzDOBoardService());
 
         public static AzDOBoardService Instance { get => lazy.Value; }
 

@@ -70,6 +70,26 @@ namespace TaskBoardAssistant
             return Execute(policies);
         }
 
+        public static IEnumerable<PolicyResult> ExecuteFromYmlString(string policies)
+        {
+            return Execute(PolicyService.YmlFromString(policies));
+        }
+
+        public static IEnumerable<PolicyResult> ExecuteFromJsonString(string policies)
+        {
+            return Execute(PolicyService.JsonFromString(policies));
+        }
+
+        public static IEnumerable<PolicyResult> ExecuteFromYmlPath(string path)
+        {
+            return Execute(PolicyService.YmlFromFile(path));
+        }
+
+        public static IEnumerable<PolicyResult> ExecuteFromJsonPath(string path)
+        {
+            return Execute(PolicyService.JsonFromFile(path));
+        }
+
         private static IEnumerable<PolicyResult> Execute(PolicyCollection collection)
         {
             ServiceFactory serviceFactory = new ServiceFactory();

@@ -10,7 +10,7 @@ namespace TaskBoardAssistant.Adapters.Trello
 {
     public class TrelloServiceFactory : ITaskBoardFactory
     {
-        private static readonly Lazy<TrelloServiceFactory> lazy = new Lazy<TrelloServiceFactory>();
+        private static readonly Lazy<TrelloServiceFactory> lazy = new Lazy<TrelloServiceFactory>(() => new TrelloServiceFactory());
         public static TrelloServiceFactory Instance { get => lazy.Value; }
         private TrelloServiceFactory()
         {
