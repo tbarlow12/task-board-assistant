@@ -4,57 +4,24 @@ using TaskBoardAssistant.Adapters.Trello.Services;
 using TaskBoardAssistant.Adapters.Trello;
 using TaskBoardAssistant.Core;
 using TaskBoardAssistant.Core.Models;
+using System;
 
 namespace TaskBoardAssistant.Adapters.Trello
 {
     public class TrelloServiceFactory : ITaskBoardFactory
     {
-        TrelloBoardService trelloBoardService;
-        TrelloListService trelloListService;
-        TrelloCardService trelloCardService;
-        TrelloLabelService trelloLabelService;
-
-        public TrelloServiceFactory()
+        private static readonly Lazy<TrelloServiceFactory> lazy = new Lazy<TrelloServiceFactory>();
+        public static TrelloServiceFactory Instance { get => lazy.Value; }
+        private TrelloServiceFactory()
         {
             TrelloConfig.Initialize();
         }
+        public BoardService BoardService => TrelloBoardService.Instance;
 
-        public TrelloServiceFactory(string secretsPath)
-        {
-            TrelloConfig.Initialize(secretsPath);
-        }
+        public ListService ListService => TrelloListService.Instance;
 
-        public BoardService GetBoardService()
-        {
-            if (trelloBoardService == null)
-                trelloBoardService = new TrelloBoardService(this);
-            return trelloBoardService;
-        }
+        public CardService CardService => TrelloCardService.Instance;
 
-        public ListService GetListService()
-        {
-            if (trelloListService == null)
-                trelloListService = new TrelloListService(this);
-            return trelloListService;
-        }
-
-        public CardService GetCardService()
-        {
-            if (trelloCardService == null)
-                trelloCardService = new TrelloCardService(this);
-            return trelloCardService;
-        }
-
-        public LabelService GetLabelService()
-        {
-            if (trelloLabelService == null)
-                trelloLabelService = new TrelloLabelService(this);
-            return trelloLabelService;
-        }
-
-        public ResourceService GetResourceService(ResourceType type)
-        {
-            throw new System.NotImplementedException();
-        }
+        public LabelService LabelService => TrelloLabelService.Instance;        
     }
 }

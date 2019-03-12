@@ -4,6 +4,7 @@ using TaskBoardAssistant.Core.Models.Resources;
 using TaskBoardAssistant.Core.Services;
 using TaskBoardAssistant.Adapters.Trello.Models;
 using TaskBoardAssistant.Core.Services.Resources;
+using System;
 
 namespace TaskBoardAssistant.Adapters.Trello.Services
 {
@@ -11,9 +12,13 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
     {
         TrelloService trello;
 
-        public TrelloCardService(TrelloServiceFactory factory)
+        private static readonly Lazy<TrelloCardService> lazy = new Lazy<TrelloCardService>();
+
+        public static TrelloCardService Instance { get => lazy.Value; }
+
+        private TrelloCardService()
         {
-            Factory = factory;
+            Factory = TrelloServiceFactory.Instance;
             trello = TrelloService.Instance;
         }
 

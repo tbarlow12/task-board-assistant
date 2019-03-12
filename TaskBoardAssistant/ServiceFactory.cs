@@ -7,13 +7,12 @@ namespace TaskBoardAssistant
 {
     public class ServiceFactory
     {
-
         public ITaskBoardFactory GetTaskBoardFactory(ServiceProvider provider)
         {
             switch (provider)
             {
                 case ServiceProvider.Trello:
-                    return new TrelloServiceFactory();
+                    return TrelloServiceFactory.Instance;
                 default:
                     throw new NotImplementedException();
             }

@@ -12,9 +12,13 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
     {
         TrelloService trello;
 
-        public TrelloBoardService(TrelloServiceFactory factory)
+        private static readonly Lazy<TrelloBoardService> lazy = new Lazy<TrelloBoardService>();
+
+        public static TrelloBoardService Instance { get => lazy.Value; }
+
+        private TrelloBoardService()
         {
-            Factory = factory;
+            Factory = TrelloServiceFactory.Instance;
             trello = TrelloService.Instance;
         }
 
@@ -25,18 +29,11 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
             return new TrelloBoard(board);
         }
 
-        public ITaskResource Test(string id)
-        {
-            var board = trello.Factory.Board(id);
-            return new TrelloBoard(board);
-
-        }
-
         public override async Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null)
         {
             if(parents != null)
             {
-                throw new Exception("Boards shouldn't have parents right now");
+                throw new Exception("Boards shouldn't have parents");
             }
             var me = await trello.GetMe();
             var boards = await me.GetAllMyBoards();

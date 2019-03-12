@@ -5,25 +5,22 @@ using TaskBoardAssistant.Core.Models;
 using TaskBoardAssistant.Core.Models.Resources;
 using TaskBoardAssistant.Core.Services.Resources;
 
-namespace TaskBoardAssistant.Adapters.Trello.Services
+namespace TaskBoardAssistant.Adapters.Github.Services
 {
-    public class TrelloLabelService : LabelService
+    public class GithubLabelService : LabelService
     {
-        TrelloService trello;
+        GithubService github;
 
-        private static readonly Lazy<TrelloLabelService> lazy = new Lazy<TrelloLabelService>();
-        public static TrelloLabelService Instance { get => lazy.Value; }
+        private static readonly Lazy<GithubLabelService> lazy = new Lazy<GithubLabelService>();
 
-        private TrelloLabelService()
+        public static GithubLabelService Instance { get => lazy.Value; }
+
+        private GithubLabelService()
         {
-            Factory = TrelloServiceFactory.Instance;
-            trello = TrelloService.Instance;
+            github = GithubService.Instance;
+            Factory = GithubServiceFactory.Instance;
         }
 
-        public override Task CommitResources()
-        {
-            return trello.CommitResources();
-        }
         public override Task<ITaskResource> GetById(string id)
         {
             throw new NotImplementedException();
@@ -36,6 +33,11 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
         public override Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
         {
             throw new NotImplementedException();
+        }
+
+        public override Task CommitResources()
+        {
+            return github.CommitResources();
         }
     }
 }
