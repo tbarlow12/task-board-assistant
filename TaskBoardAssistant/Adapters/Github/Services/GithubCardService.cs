@@ -12,7 +12,7 @@ namespace TaskBoardAssistant.Adapters.Github.Services
     {
         GithubService github;
 
-        private static readonly Lazy<GithubCardService> lazy = new Lazy<GithubCardService>();
+        private static readonly Lazy<GithubCardService> lazy = new Lazy<GithubCardService>(() => new GithubCardService());
 
         public static GithubCardService Instance { get => lazy.Value; }
 

@@ -11,7 +11,7 @@ namespace TaskBoardAssistant.Adapters.Github.Services
     {
         GithubService github;
 
-        private static readonly Lazy<GithubListService> lazy = new Lazy<GithubListService>();
+        private static readonly Lazy<GithubListService> lazy = new Lazy<GithubListService>(() => new GithubListService());
 
         public static GithubListService Instance { get => lazy.Value; }
 

@@ -37,6 +37,7 @@ namespace TaskBoardAssistant.Core.Models
 
     public enum ResourceType
     {
+        // Trello
         Team,
         Board,
         List,
@@ -47,5 +48,9 @@ namespace TaskBoardAssistant.Core.Models
         Webhook,
         Card,
         Label,
+        // Github
+        Repo,
+        Project,
+        Issue
     }   
 }

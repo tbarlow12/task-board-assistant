@@ -7,9 +7,13 @@ namespace TaskBoardAssistant.Adapters.Github
 {
     public class GithubConfig
     {
+        public static string Username { get; private set; }
+        public static string DefaultRepo { get; private set; }
+        public static string Token { get; private set; }
         public static void Initialize()
         {
-            throw new NotImplementedException();
+            Username = Environment.GetEnvironmentVariable("GITHUB_USERNAME");
+            Token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
         }
     }
 }

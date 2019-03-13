@@ -13,6 +13,8 @@
     <PackageReference Include="Manatee.Trello" Version="3.4.3" />
     <PackageReference Include="Manatee.Trello.ManateeJson" Version="2.3.0" />
     <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="9.4.0" />
+    <PackageReference Include="Octokit" Version="0.32.0" />
+    <PackageReference Include="RestSharp" Version="106.6.9" />
     <PackageReference Include="YamlDotNet" Version="5.2.1" />
   </ItemGroup>
 

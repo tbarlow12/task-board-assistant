@@ -10,7 +10,7 @@ namespace TaskBoardAssistant.Adapters.Github
 {
     public class GithubServiceFactory : ITaskBoardFactory
     {
-        private static readonly Lazy<GithubServiceFactory> lazy = new Lazy<GithubServiceFactory>();
+        private static readonly Lazy<GithubServiceFactory> lazy = new Lazy<GithubServiceFactory>(() => new GithubServiceFactory());
 
         public static GithubServiceFactory Instance { get => lazy.Value; }
 
@@ -19,7 +19,7 @@ namespace TaskBoardAssistant.Adapters.Github
             GithubConfig.Initialize();
         }
 
-        public BoardService BoardService => GithubBoardService.Instance;
+        public BoardService BoardService => GithubRepoService.Instance;
 
         public ListService ListService => GithubListService.Instance;
 

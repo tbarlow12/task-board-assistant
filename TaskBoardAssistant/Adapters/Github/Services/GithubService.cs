@@ -1,6 +1,8 @@
 ﻿
+using RestSharp;
 using System;
 using System.Threading.Tasks;
+using Octokit;
 
 namespace TaskBoardAssistant.Adapters.Github.Services
 {
@@ -12,11 +14,12 @@ namespace TaskBoardAssistant.Adapters.Github.Services
 
         private GithubService() { }
 
-        public object Factory
-        {
+        public GitHubClient Client {
             get
             {
-                throw new NotImplementedException();
+                var client = new GitHubClient(new ProductHeaderValue(GithubConfig.Username));
+                client.Credentials = new Credentials(GithubConfig.Token);
+                return client;
             }
         }
 

@@ -13,6 +13,7 @@ namespace TaskBoardAssistant.Core
             switch (resourceType)
             {
                 case ResourceType.Board:
+                case ResourceType.Repo:
                     return factory.BoardService;
                 case ResourceType.List:
                     return factory.ListService;
