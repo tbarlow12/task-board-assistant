@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TaskBoardAssistant.Adapters.AzDO.Services
 {
-    class AzDOBoardService
+    class AzDORepoService
     {
     }
 }
