@@ -29,7 +29,7 @@ namespace TaskBoardAssistant.Adapters.Github.Services
             throw new NotImplementedException();
         }
 
-        public override async Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null)
+        public override async Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null, Dictionary<string, string> queryParams = null)
         {
             var request = restFactory.Repos.GetAll();
             var response = await github.Client.Repository.GetAllForUser(GithubConfig.Username);

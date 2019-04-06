@@ -130,7 +130,7 @@ namespace TaskBoardAssistant.Adapters.AzDO.Services
             throw new NotImplementedException();
         }
 
-        public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null, Dictionary<string, string> query)
+        public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null, Dictionary<string, string> query = null)
         {
             throw new NotImplementedException();
         }

@@ -26,7 +26,7 @@ namespace TaskBoardAssistant.Adapters.Github.Services
             throw new NotImplementedException();
         }
 
-        public async override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parentResources)
+        public async override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parentResources, Dictionary<string, string> queryParams = null)
         {
             if(parentResources == null)
             {

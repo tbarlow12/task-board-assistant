@@ -33,7 +33,7 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
             return new TrelloList(list);
         }
 
-        public async override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parentResources)
+        public async override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parentResources, Dictionary<string, string> queryParams = null)
         {
             if(parentResources == null)
             {

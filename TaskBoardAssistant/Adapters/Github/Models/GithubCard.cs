@@ -21,6 +21,7 @@ namespace TaskBoardAssistant.Adapters.Github.Models
         public string Id => throw new NotImplementedException();
 
         public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ITaskBoardMember AssignedTo { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public Task AddComment(string comment)
         {

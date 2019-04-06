@@ -18,7 +18,7 @@ namespace TaskBoardAssistant.Adapters.Simulators.Services
             throw new NotImplementedException();
         }
 
-        public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null)
+        public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null, Dictionary<string, string> queryParams = null)
         {
             throw new NotImplementedException();
         }
