@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
 using TaskBoardAssistant.Core.Models;
@@ -16,12 +15,12 @@ namespace TaskBoardAssistant.Adapters.Github.Models
 
         public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public Task<IEnumerable<ITaskResource>> AddCard(BaseAction action)
+        public Task<ITaskResource> AddCard(BaseAction action)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ITaskResource>> Archive()
+        public Task Archive()
         {
             throw new NotImplementedException();
         }
