@@ -11,7 +11,7 @@ namespace TaskBoardAssistant.Core.Services.Resources
     {
         // ABSTRACT
         public abstract Task<ITaskResource> GetById(string id);
-        public abstract Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null);
+        public abstract Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null, Dictionary<string, string> queryParams = null);
         public abstract bool SatisfiesFilter(ITaskResource resource, TaskBoardResourceFilter filter);
         public abstract Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action);
         public abstract Task CommitResources();

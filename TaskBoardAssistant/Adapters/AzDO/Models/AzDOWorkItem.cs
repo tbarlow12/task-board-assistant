@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TaskBoardAssistant.Adapters.AzDO.Services
+namespace TaskBoardAssistant.Adapters.AzDO.Models
 {
-    class AzDOBugService
+    class AzDOWorkItem
     {
     }
 }

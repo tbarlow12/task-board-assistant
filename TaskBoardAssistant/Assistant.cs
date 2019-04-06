@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskBoardAssistant.Core;
 using TaskBoardAssistant.Core.Models;
+using TaskBoardAssistant.Core.Services;
 using TaskBoardAssistant.Core.Services.Policy;
 
 namespace TaskBoardAssistant

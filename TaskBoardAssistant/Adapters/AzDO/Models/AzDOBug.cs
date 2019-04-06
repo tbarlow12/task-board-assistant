@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TaskBoardAssistant.Adapters.AzDO.Models
 {
-    class AzDOBug
+    class AzDOBug : AzDOWorkItem
     {
     }
 }

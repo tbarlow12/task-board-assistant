@@ -21,10 +21,10 @@ namespace TaskBoardAssistant.Adapters.AzDO
 
         public BoardService BoardService => AzDOBoardService.Instance;
 
-        public ListService ListService => AzDOListService.Instance;
+        public ListService ListService => throw new NotImplementedException();
 
-        public CardService CardService => AzDOCardService.Instance;
+        public CardService CardService => AzDOWorkItemService.Instance;
 
-        public LabelService LabelService => AzDOLabelService.Instance;
+        public LabelService LabelService => throw new NotImplementedException();
     }
 }
