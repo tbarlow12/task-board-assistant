@@ -8,6 +8,12 @@ namespace TaskBoardAssistant.Core.Services
 {
     public static class Extensions
     {
+
+        public static TEnum GetEnum<TEnum>(this IDictionary<string, string> dictionary, string key)
+        {
+            return (TEnum)Enum.Parse(typeof(TEnum), dictionary[key], true);
+        }
+
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary,
              TKey key,
              TValue defaultValue)

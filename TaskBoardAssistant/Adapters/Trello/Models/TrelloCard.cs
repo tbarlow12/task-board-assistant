@@ -67,6 +67,7 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
         }
 
         public bool IsArchived { get => (bool) Card.IsArchived; set => Card.IsArchived = value; }
+        public ITaskBoardMember AssignedTo { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public Task Archive()
         {

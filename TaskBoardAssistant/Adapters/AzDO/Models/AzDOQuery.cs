@@ -17,7 +17,7 @@ namespace TaskBoardAssistant.Adapters.AzDO.Models
             Guid queryId;
             Guid.TryParse(queryParams.GetValueOrDefault("queryId"), out queryId);
             QueryId = queryId;
-            WorkItemType = queryParams.GetValueOrDefault("workItemType");
+            WorkItemType = queryParams.GetEnum<AzDOType>("workItemType");
             QueryName = queryParams.GetValueOrDefault("queryName");
             QueryName = queryParams.GetValueOrDefault("queryName");
             QueryName = queryParams.GetValueOrDefault("queryName");
