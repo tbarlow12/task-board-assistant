@@ -17,9 +17,10 @@ namespace TaskBoardAssistant.Core.Models
         {
             var other = (Policy)o;
             var nameEquals = (Name == null && other.Name == null) ||
-                (Name.Equals(other.Name));
+                (Name != null && other.Name != null && Name.Equals(other.Name));
             var resourceEquals = Resource.Equals(other.Resource);
-            var queryEquals = Query.Equals(other.Resource);
+            var queryEquals = (Query == null && other.Query == null) ||
+                (Query != null && other.Query != null && Query.Equals(other.Query));
             var filterEquals = ((Filters == null && other.Filters == null) || 
                 (Filters.SequenceEqual(other.Filters)));
             var actionEquals = (Actions == null && other.Actions == null) || 
