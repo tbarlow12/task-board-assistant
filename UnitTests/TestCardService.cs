@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TaskBoardAssistant.Core.Models;
+using TaskBoardAssistant.Core;
 using TaskBoardAssistant.Core.Services;
 using TaskBoardAssistant.Adapters.Simulators.Models;
 using TaskBoardAssistant.Adapters.Simulators;

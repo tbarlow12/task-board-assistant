@@ -11,7 +11,7 @@ namespace TaskBoardAssistant.Core.Models
     public enum ServiceProvider
     {
         Trello,
-        Jira,
-        Planner
+        Github,
+        AzDO,
     }
 }

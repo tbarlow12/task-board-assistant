@@ -8,6 +8,7 @@ namespace TaskBoardAssistant.Core.Models.Resources
     {
         // PROPERTIES
         string Description { get; set; }
+        ITaskBoardMember AssignedTo { get; set; }
         DateTime? DueDate { get; set; }
         IEnumerable<ITaskLabel> Labels { get; }
         IEnumerable<string> Comments { get; }

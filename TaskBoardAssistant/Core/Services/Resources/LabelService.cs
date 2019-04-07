@@ -10,7 +10,7 @@ namespace TaskBoardAssistant.Core.Services.Resources
     {
         public ITaskLabel GetLabel(string boardName, string labelName)
         {
-            var boardService = Factory.GetBoardService();
+            var boardService = Factory.BoardService;
             var board = boardService.GetByName(boardName);
             return GetLabel(board, labelName);
         }

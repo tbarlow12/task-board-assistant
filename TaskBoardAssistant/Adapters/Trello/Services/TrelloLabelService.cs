@@ -11,9 +11,12 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
     {
         TrelloService trello;
 
-        public TrelloLabelService(TrelloServiceFactory factory)
+        private static readonly Lazy<TrelloLabelService> lazy = new Lazy<TrelloLabelService>(() => new TrelloLabelService());
+        public static TrelloLabelService Instance { get => lazy.Value; }
+
+        private TrelloLabelService()
         {
-            Factory = factory;
+            Factory = TrelloServiceFactory.Instance;
             trello = TrelloService.Instance;
         }
 
@@ -25,7 +28,7 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
         {
             throw new NotImplementedException();
         }
-        public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null)
+        public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null, Dictionary<string, string> queryParams = null)
         {
             throw new NotImplementedException();
         }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using TaskBoardAssistant.Core.Models.Resources;
 using TaskBoardAssistant.Core.Services.Resources;
 using TaskBoardAssistant.Adapters.Trello.Models;
+using System;
 
 namespace TaskBoardAssistant.Adapters.Trello.Services
 {
@@ -10,9 +11,13 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
     {
         TrelloService trello;
 
-        public TrelloListService(TrelloServiceFactory factory)
+        private static readonly Lazy<TrelloListService> lazy = new Lazy<TrelloListService>(() => new TrelloListService());
+
+        public static TrelloListService Instance { get => lazy.Value; }
+
+        private TrelloListService()
         {
-            Factory = factory;
+            Factory = TrelloServiceFactory.Instance;
             trello = TrelloService.Instance;
         }
 
@@ -28,7 +33,7 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
             return new TrelloList(list);
         }
 
-        public async override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parentResources)
+        public async override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parentResources, Dictionary<string, string> queryParams = null)
         {
             if(parentResources == null)
             {

@@ -6,10 +6,9 @@ namespace TaskBoardAssistant.Core
 {
     public interface ITaskBoardFactory
     {
-        ResourceService GetResourceService(ResourceType type);
-        BoardService GetBoardService();
-        ListService GetListService();
-        CardService GetCardService();
-        LabelService GetLabelService();
+        BoardService BoardService { get; }
+        ListService ListService { get; }
+        CardService CardService { get; }
+        LabelService LabelService { get; }
     }
 }

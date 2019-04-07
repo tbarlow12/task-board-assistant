@@ -34,21 +34,13 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
 
         public bool Archived { get => (bool)List.IsArchived; set => List.IsArchived = value; }
 
-        public async Task AddCard(BaseAction action)
-        {
-            var name = action.Params.GetValueOrDefault("name");
-            var desc = action.Params.GetValueOrDefault("desc");
-            var due = action.Params.GetValueOrDefault("due");
-            var member = action.Params.GetValueOrDefault("members");
-            await AddCard(name, desc, due, member);
-        }
-
-        public async Task AddCard(string name, string desc = null, string due = null, string member = null)
+        public async Task<TrelloCard> AddCard(string name, string desc = null, string due = null, string member = null)
         {
             var dueDate = due.ToDateTime();
             if (dueDate == null)
                 dueDate = due.ToRelativeDateTime();
-            await List.Cards.Add(name, description: desc, dueDate: dueDate);
+            var card = await List.Cards.Add(name, description: desc, dueDate: dueDate);
+            return new TrelloCard(card);
         }
 
         public Task SortList(BaseAction action)
@@ -57,14 +49,19 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
             return Task.CompletedTask;
         }
 
-        Task<IEnumerable<ITaskResource>> ITaskList.AddCard(BaseAction action)
+        async Task<ITaskResource> ITaskList.AddCard(BaseAction action)
         {
-            throw new System.NotImplementedException();
+            var name = action.Params.GetValueOrDefault("name");
+            var desc = action.Params.GetValueOrDefault("desc");
+            var due = action.Params.GetValueOrDefault("due");
+            var member = action.Params.GetValueOrDefault("members");
+            return await AddCard(name, desc, due, member);
         }
 
-        public Task<IEnumerable<ITaskResource>> Archive()
+        public Task Archive()
         {
-            throw new System.NotImplementedException();
+            Archived = true;
+            return Task.CompletedTask;
         }
 
         public Task Rename(string newName)

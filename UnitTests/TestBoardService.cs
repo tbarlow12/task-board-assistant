@@ -1,8 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
+using TaskBoardAssistant.Core;
 using TaskBoardAssistant.Adapters.Simulators;
 using TaskBoardAssistant.Core.Models;
+using TaskBoardAssistant.Core.Services;
 using TaskBoardAssistant.Core.Services.Resources;
 using TaskBoardAssistant.Adapters.Simulators.Services;
 

@@ -1,6 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TaskBoardAssistant.Adapters.Simulators;
+using TaskBoardAssistant.Core;
 using TaskBoardAssistant.Core.Models;
+using TaskBoardAssistant.Core.Services;
 using TaskBoardAssistant.Core.Services.Resources;
 
 namespace UnitTests
@@ -17,5 +19,4 @@ namespace UnitTests
             Assert.IsNotNull(listService);
         }
     }
-        
 }

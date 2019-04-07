@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TaskBoardAssistant.Core.Models.Resources;
 using TaskBoardAssistant.Core.Services.Resources;
 using TaskBoardAssistant.Adapters.Simulators.Models;
+using TaskBoardAssistant.Core.Models;
 
 namespace TaskBoardAssistant.Adapters.Simulators.Services
 {
@@ -47,9 +48,14 @@ namespace TaskBoardAssistant.Adapters.Simulators.Services
             throw new NotImplementedException();
         }
 
-        public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null)
+        public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null, Dictionary<string, string> queryParams = null)
         {
             return Task.FromResult(boards);
+        }
+
+        public override Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
+        {
+            throw new NotImplementedException();
         }
     }
 }

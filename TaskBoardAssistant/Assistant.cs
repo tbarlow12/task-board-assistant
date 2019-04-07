@@ -3,10 +3,12 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using TaskBoardAssistant.Core;
 using TaskBoardAssistant.Core.Models;
+using TaskBoardAssistant.Core.Services;
 using TaskBoardAssistant.Core.Services.Policy;
 
 namespace TaskBoardAssistant
@@ -58,9 +60,46 @@ namespace TaskBoardAssistant
             }
         }
 
+        private static PolicyCollection LoadPoliciesFromHttp(string url)
+        {
+            using (WebClient client = new WebClient())
+            {
+                string policy = client.DownloadString(url);
+                if (url.EndsWith("json"))
+                {
+                    return PolicyService.JsonFromString(policy);
+                }
+                else if (url.EndsWith("yml") || url.EndsWith("yaml"))
+                {
+                    return PolicyService.YmlFromString(policy);
+                }
+                else
+                {
+                    throw new InvalidDataException("Invalid file extension. Make sure file ext is .json, .yml or .yaml");
+                }
+            }
+        }
+
+        private static PolicyCollection LoadPoliciesFromGitHub(string user, string repo, string path, string branch)
+        {
+            return LoadPoliciesFromHttp($"https://raw.githubusercontent.com/{user}/{repo}/{branch}/{path}");
+        }
+
         public static IEnumerable<PolicyResult> ExecuteFromPath(string fileName)
         {
             var policies = LoadPoliciesFromPath(fileName);
+            return Execute(policies);
+        }
+
+        public static IEnumerable<PolicyResult> ExecuteFromHttp(string url)
+        {
+            var policies = LoadPoliciesFromHttp(url);
+            return Execute(policies);
+        }
+
+        public static IEnumerable<PolicyResult> ExecuteFromGitHub(string user, string repo, string path, string branch = "master")
+        {
+            var policies = LoadPoliciesFromGitHub(user, repo, path, branch);
             return Execute(policies);
         }
 
@@ -68,6 +107,26 @@ namespace TaskBoardAssistant
         {
             var policies = LoadPoliciesFromBlob(connectionString, containerName, fileName).Result;
             return Execute(policies);
+        }
+
+        public static IEnumerable<PolicyResult> ExecuteFromYmlString(string policies)
+        {
+            return Execute(PolicyService.YmlFromString(policies));
+        }
+
+        public static IEnumerable<PolicyResult> ExecuteFromJsonString(string policies)
+        {
+            return Execute(PolicyService.JsonFromString(policies));
+        }
+
+        public static IEnumerable<PolicyResult> ExecuteFromYmlPath(string path)
+        {
+            return Execute(PolicyService.YmlFromFile(path));
+        }
+
+        public static IEnumerable<PolicyResult> ExecuteFromJsonPath(string path)
+        {
+            return Execute(PolicyService.JsonFromFile(path));
         }
 
         private static IEnumerable<PolicyResult> Execute(PolicyCollection collection)
