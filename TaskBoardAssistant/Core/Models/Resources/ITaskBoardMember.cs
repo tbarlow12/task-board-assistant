@@ -1,6 +1,6 @@
 ﻿namespace TaskBoardAssistant.Core.Models.Resources
 {
-    public interface ITaskBoardMember : ITaskResource
+    public interface ITaskMember : ITaskResource
     {
         string Username { get; }
         string FullName { get; }

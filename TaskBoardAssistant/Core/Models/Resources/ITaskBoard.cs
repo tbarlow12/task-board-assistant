@@ -7,7 +7,7 @@ namespace TaskBoardAssistant.Core.Models.Resources
     {
         // PROPERTIES
         IEnumerable<ITaskList> Lists { get; }
-        IEnumerable<ITaskBoardMember> Members { get; }
+        IEnumerable<ITaskMember> Members { get; }
         bool IsOpen { get; set; }
 
         //OPERATIONS

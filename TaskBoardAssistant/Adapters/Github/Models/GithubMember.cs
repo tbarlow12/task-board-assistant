@@ -6,7 +6,7 @@ using TaskBoardAssistant.Core.Models.Resources;
 
 namespace TaskBoardAssistant.Adapters.Github.Models
 {
-    class GithubMember : ITaskBoardMember
+    class GithubMember : ITaskMember
     {
         public string Username => throw new NotImplementedException();
 

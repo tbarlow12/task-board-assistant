@@ -35,7 +35,7 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
 
         public bool Archived { get => (bool)List.IsArchived; set => List.IsArchived = value; }
 
-        public async Task<TrelloCard> AddCard(string name, string desc, string due, string member, string labels)
+        public async Task<TrelloCard> AddCard(string name, string desc, string due, string members, string labels)
         {
             var dueDate = due.ToDateTime();
             if (dueDate == null)
@@ -48,11 +48,23 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
                 var labelSplit = labels.Split(',');
                 foreach(var labelName in labelSplit)
                 {
-                    var label = await labelService.GetByName(List.Board, labelName);
+                    TrelloLabel label = await labelService.GetByName(List.Board, labelName);
                     labelList.Add(label.Label);
                 }
             }
-            var card = await List.Cards.Add(name, description: desc, dueDate: dueDate, labels: labelList);
+            List<IMember> memberList = null;
+            if (members != null)
+            {
+                var memberService = TrelloMemberService.Instance;
+                memberList = new List<IMember>();
+                var memberSplit = members.Split('.');
+                foreach(var memberName in memberSplit)
+                {
+                    TrelloMember member = await memberService.GetByUsername(List.Board, memberName);
+                    memberList.Add(member.Member);
+                }
+            }
+            var card = await List.Cards.Add(name, description: desc, dueDate: dueDate, labels: labelList, members: memberList);
             return new TrelloCard(card);
         }
 
@@ -67,9 +79,9 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
             var name = action.Params.GetValueOrDefault("name");
             var desc = action.Params.GetValueOrDefault("desc");
             var due = action.Params.GetValueOrDefault("due");
-            var member = action.Params.GetValueOrDefault("members");
+            var members = action.Params.GetValueOrDefault("assignedTo");
             var labels = action.Params.GetValueOrDefault("labels");
-            return await AddCard(name, desc, due, member, labels);
+            return await AddCard(name, desc, due, members, labels);
         }
 
         public Task Archive()

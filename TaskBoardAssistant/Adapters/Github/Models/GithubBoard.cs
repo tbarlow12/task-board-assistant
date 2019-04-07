@@ -9,7 +9,7 @@ namespace TaskBoardAssistant.Adapters.Github.Models
     {
         public IEnumerable<ITaskList> Lists => throw new NotImplementedException();
 
-        public IEnumerable<ITaskBoardMember> Members => throw new NotImplementedException();
+        public IEnumerable<ITaskMember> Members => throw new NotImplementedException();
 
         public bool IsOpen { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 

@@ -30,12 +30,12 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
             }
             return result;
         }
-        public IEnumerable<ITaskBoardMember> Members => GetMembers().Result;
+        public IEnumerable<ITaskMember> Members => GetMembers().Result;
 
-        private async Task<IEnumerable<ITaskBoardMember>> GetMembers()
+        private async Task<IEnumerable<ITaskMember>> GetMembers()
         {
             await Board.Members.Refresh();
-            var result = new List<ITaskBoardMember>();
+            var result = new List<ITaskMember>();
             foreach (var member in Board.Members)
             {
                 result.Add(new TrelloMember(member));

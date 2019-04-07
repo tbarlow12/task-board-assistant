@@ -6,7 +6,7 @@ using TaskBoardAssistant.Core.Models.Resources;
 
 namespace TaskBoardAssistant.Adapters.Trello.Models
 {
-    class TrelloMember : ITaskBoardMember
+    public class TrelloMember : ITaskMember
     {
         public TrelloMember(IMember member)
         {

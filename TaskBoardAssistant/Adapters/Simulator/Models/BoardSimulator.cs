@@ -9,7 +9,7 @@ namespace TaskBoardAssistant.Adapters.Simulators.Models
     {
         public IEnumerable<ITaskList> Lists => throw new NotImplementedException();
 
-        public IEnumerable<ITaskBoardMember> Members => throw new NotImplementedException();
+        public IEnumerable<ITaskMember> Members => throw new NotImplementedException();
 
         public bool IsOpen { get; set; }
 

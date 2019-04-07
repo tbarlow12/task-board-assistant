@@ -6,7 +6,7 @@ using TaskBoardAssistant.Core.Models.Resources;
 
 namespace TaskBoardAssistant.Adapters.AzDO.Models
 {
-    class AzDOMember : ITaskBoardMember
+    class AzDOMember : ITaskMember
     {
         public string Username => throw new NotImplementedException();
 
