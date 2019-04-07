@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TaskBoardAssistant.Core.Models;
@@ -10,7 +11,7 @@ namespace TaskBoardAssistant.Core.Services.Resources
     {
         // ABSTRACT
         public abstract Task<ITaskResource> GetById(string id);
-        public abstract Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null);
+        public abstract Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null, Dictionary<string, string> queryParams = null);
         public abstract bool SatisfiesFilter(ITaskResource resource, TaskBoardResourceFilter filter);
         public abstract Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action);
         public abstract Task CommitResources();
@@ -32,7 +33,7 @@ namespace TaskBoardAssistant.Core.Services.Resources
                 result.ChildrenResults = new List<PolicyResult>();
                 foreach (var child in policy.Children)
                 {
-                    var childResourceService = Factory.GetResourceService(child.Resource);
+                    var childResourceService = Factory.GetResourceService( child.Resource);
                     result.ChildrenResults.Add(
                         await childResourceService.ExecutePolicy(child, resources)
                     );
@@ -49,6 +50,7 @@ namespace TaskBoardAssistant.Core.Services.Resources
             }
             return result;
         }
+
         private async Task<IEnumerable<ITaskResource>> GetResources(Models.Policy policy, IEnumerable<ITaskResource> parents)
         {
             IEnumerable<ITaskResource> resources;

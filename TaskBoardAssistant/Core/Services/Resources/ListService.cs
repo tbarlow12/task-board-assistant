@@ -11,7 +11,7 @@ namespace TaskBoardAssistant.Core.Services.Resources
     {
         public ITaskList GetList(string boardName, string listName)
         {
-            var boardService = Factory.GetBoardService();
+            var boardService = Factory.BoardService;
             var board = boardService.GetByName(boardName);
             return GetList(board, listName);
         }

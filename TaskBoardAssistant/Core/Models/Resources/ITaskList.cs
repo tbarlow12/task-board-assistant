@@ -9,8 +9,8 @@ namespace TaskBoardAssistant.Core.Models.Resources
         IEnumerable<ITaskCard> Cards { get; }
 
         // OPERATIONS
-        Task<IEnumerable<ITaskResource>> AddCard(BaseAction action);
-        Task<IEnumerable<ITaskResource>> Archive();
+        Task<ITaskResource> AddCard(BaseAction action);
+        Task Archive();
         Task SortList(BaseAction action);
     }
 }

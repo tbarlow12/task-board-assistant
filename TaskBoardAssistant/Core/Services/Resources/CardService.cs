@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TaskBoardAssistant.Core;
 using TaskBoardAssistant.Core.Models;
 using TaskBoardAssistant.Core.Models.Resources;
 
@@ -19,7 +20,7 @@ namespace TaskBoardAssistant.Core.Services.Resources
 
         public async Task Move(IEnumerable<ITaskResource> resources, BaseAction action)
         {
-            var listService = Factory.GetListService();
+            var listService = Factory.ListService;
             var list = listService.GetList(action.Params["board"], action.Params["list"]);
             foreach(var resource in resources)
             {
@@ -29,7 +30,7 @@ namespace TaskBoardAssistant.Core.Services.Resources
 
         public void AddLabel(IEnumerable<ITaskResource> resources, BaseAction action)
         {
-            var labelService = Factory.GetLabelService();
+            var labelService = Factory.LabelService;
             var label = labelService.GetLabel(action.Params["board"], action.Params["label"]);
             foreach(var resource in resources)
             {
