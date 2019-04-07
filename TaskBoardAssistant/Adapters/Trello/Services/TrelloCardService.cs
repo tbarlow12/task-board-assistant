@@ -42,8 +42,20 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
                 var result = new List<TrelloCard>();
                 foreach(var parent in parentResources)
                 {
-                    var cards = await ((TrelloList)parent).List.GetListCards();
-                    result.AddRange(cards.ToTrelloCards());
+                    if (parent.GetType() == typeof(TrelloList))
+                    {
+                        var cards = await ((TrelloList)parent).List.GetListCards();
+                        result.AddRange(cards.ToTrelloCards());
+                    }
+                    else if (parent.GetType() == typeof(TrelloBoard))
+                    {
+                        var lists = ((TrelloBoard)parent).Lists;
+                        foreach(var list in lists)
+                        {
+                            var cards = await ((TrelloList)list).List.GetListCards();
+                            result.AddRange(cards.ToTrelloCards());
+                        }
+                    }                    
                 }
                 return result;
             }
@@ -52,6 +64,11 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
         public override Task CommitResources()
         {
             return trello.CommitResources();
+        }
+
+        public override Task<ITaskResource> GetByName(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

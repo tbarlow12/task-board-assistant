@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TaskBoardAssistant.Core.Models;
+using TaskBoardAssistant.Core.Services;
 using TaskBoardAssistant.Core.Models.Resources;
 using TaskBoardAssistant.Core.Services.Resources;
+using TaskBoardAssistant.Adapters.Trello.Models;
+using Manatee.Trello;
 
 namespace TaskBoardAssistant.Adapters.Trello.Services
 {
@@ -28,7 +31,7 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
         {
             throw new NotImplementedException();
         }
-        public override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null, Dictionary<string, string> queryParams = null)
+        public async override Task<IEnumerable<ITaskResource>> GetResources(IEnumerable<ITaskResource> parents = null, Dictionary<string, string> queryParams = null)
         {
             throw new NotImplementedException();
         }
@@ -36,6 +39,24 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
         public override Task<IEnumerable<ITaskResource>> PerformAction(IEnumerable<ITaskResource> resources, BaseAction action)
         {
             throw new NotImplementedException();
+        }
+
+        public override Task<ITaskResource> GetByName(string name)
+        {
+            throw new InvalidOperationException();
+        }
+
+        public async Task<TrelloLabel> GetByName(IBoard board, string name)
+        {
+            await board.Labels.Refresh();
+            foreach(var label in board.Labels)
+            {
+                if (label.Name.EqualsIgnoreCase(name))
+                {
+                    return new TrelloLabel(label);
+                }
+            }
+            return null;
         }
     }
 }

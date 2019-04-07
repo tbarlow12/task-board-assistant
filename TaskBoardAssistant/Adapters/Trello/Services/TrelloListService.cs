@@ -52,5 +52,10 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
                 return result;
             }
         }
+
+        public override Task<ITaskResource> GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

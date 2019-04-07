@@ -1,6 +1,7 @@
 ﻿using Manatee.Trello;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TaskBoardAssistant.Adapters.Trello.Services;
 using TaskBoardAssistant.Core.Models;
 using TaskBoardAssistant.Core.Models.Resources;
 using TaskBoardAssistant.Core.Services;
@@ -34,12 +35,24 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
 
         public bool Archived { get => (bool)List.IsArchived; set => List.IsArchived = value; }
 
-        public async Task<TrelloCard> AddCard(string name, string desc = null, string due = null, string member = null)
+        public async Task<TrelloCard> AddCard(string name, string desc, string due, string member, string labels)
         {
             var dueDate = due.ToDateTime();
             if (dueDate == null)
                 dueDate = due.ToRelativeDateTime();
-            var card = await List.Cards.Add(name, description: desc, dueDate: dueDate);
+            List<ILabel> labelList = null;
+            if (labels != null)
+            {
+                var labelService = TrelloLabelService.Instance;
+                labelList = new List<ILabel>();
+                var labelSplit = labels.Split(',');
+                foreach(var labelName in labelSplit)
+                {
+                    var label = await labelService.GetByName(List.Board, labelName);
+                    labelList.Add(label.Label);
+                }
+            }
+            var card = await List.Cards.Add(name, description: desc, dueDate: dueDate, labels: labelList);
             return new TrelloCard(card);
         }
 
@@ -55,7 +68,8 @@ namespace TaskBoardAssistant.Adapters.Trello.Models
             var desc = action.Params.GetValueOrDefault("desc");
             var due = action.Params.GetValueOrDefault("due");
             var member = action.Params.GetValueOrDefault("members");
-            return await AddCard(name, desc, due, member);
+            var labels = action.Params.GetValueOrDefault("labels");
+            return await AddCard(name, desc, due, member, labels);
         }
 
         public Task Archive()

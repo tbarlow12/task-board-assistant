@@ -14,7 +14,7 @@ namespace TaskBoardAssistant.Adapters.AzDO.Services
         public static AzDOBoardService Instance { get => lazy.Value; }
         private AzDOBoardService(){}
 
-        public override ITaskBoard GetByName(string name)
+        public override Task<ITaskResource> GetByName(string name)
         {
             throw new NotImplementedException();
         }

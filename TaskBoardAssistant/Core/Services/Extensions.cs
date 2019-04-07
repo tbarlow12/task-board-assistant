@@ -8,6 +8,11 @@ namespace TaskBoardAssistant.Core.Services
 {
     public static class Extensions
     {
+        public static bool NullCheckEquals<T>(this T item1, T item2)
+        {
+            return (item1 == null && item2 == null) ||
+                (item1 != null && item2 != null && item1.Equals(item2));
+        }
 
         public static TEnum GetEnum<TEnum>(this IDictionary<string, string> dictionary, string key)
         {
@@ -39,9 +44,24 @@ namespace TaskBoardAssistant.Core.Services
             return t1 != null && t1.Equals(t2);
         }
 
+        public static bool IsNullOrAfter(this DateTime? t1, DateTime? t2)
+        {
+            return t1 == null || t1 > t2;
+        }
+
+        public static bool IsNullOrBefore(this DateTime? t1, DateTime? t2)
+        {
+            return t1 == null || t1 < t2;
+        }
+
         public static bool IsNullOrEquals<T>(this T t1, T t2)
         {
             return t1 == null || t1.Equals(t2);
+        }
+
+        public static bool EqualsIgnoreCase(this string t1, string t2)
+        {
+            return t1.ToLower().Equals(t2.ToLower());
         }
 
         public static bool IsNullOrEqualsIgnoreCase(this string t1, string t2)
@@ -57,16 +77,27 @@ namespace TaskBoardAssistant.Core.Services
 
         public static DateTime? ToRelativeDateTime(this string s)
         {
+            if (s == null)
+            {
+                return null;
+            }
             var split = s.Split('@');
-            if (split.Length != 2)
+            if (split.Length == 2)
+            {
+                var date = split[0];
+                var time = split[1];
+                DateTime dateOnly = date.ToDate();
+                TimeSpan timeOnly = time.ToTime();
+                return dateOnly.Date.Add(timeOnly);
+            }
+            else if (split.Length == 1)
+            {
+                return s.ToDate();
+            }
+            else
+            {
                 throw new Exception("Not a valid relative datetime");
-            var date = split[0];
-            var time = split[1];
-
-            DateTime dateOnly = date.ToDate();
-            TimeSpan timeOnly = time.ToTime();
-
-            return dateOnly.Date.Add(timeOnly);
+            }
         }
 
         private static DateTime GetDay(string s)

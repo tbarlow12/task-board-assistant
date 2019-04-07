@@ -43,7 +43,7 @@ namespace TaskBoardAssistant.Adapters.Simulators.Services
             throw new NotImplementedException();
         }
 
-        public override ITaskBoard GetByName(string name)
+        public override Task<ITaskResource> GetByName(string name)
         {
             throw new NotImplementedException();
         }

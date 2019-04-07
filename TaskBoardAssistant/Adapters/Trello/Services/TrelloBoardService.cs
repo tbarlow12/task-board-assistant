@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TaskBoardAssistant.Core.Models;
+using TaskBoardAssistant.Core.Services;
 using TaskBoardAssistant.Core.Models.Resources;
 using TaskBoardAssistant.Core.Services.Resources;
 using TaskBoardAssistant.Adapters.Trello.Models;
@@ -50,9 +51,17 @@ namespace TaskBoardAssistant.Adapters.Trello.Services
             return trello.CommitResources();
         }
 
-        public override ITaskBoard GetByName(string name)
+        public override async Task<ITaskResource> GetByName(string name)
         {
-            throw new NotImplementedException();
+            var boards = await GetResources();
+            foreach(var board in boards)
+            {
+                if (board.Name.EqualsIgnoreCase(name))
+                {
+                    return board;
+                }
+            }
+            return null;
         }
     }
 }

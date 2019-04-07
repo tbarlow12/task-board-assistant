@@ -1,4 +1,5 @@
 ﻿using System;
+using TaskBoardAssistant.Core.Services;
 
 namespace TaskBoardAssistant.Core.Models
 {
@@ -8,13 +9,18 @@ namespace TaskBoardAssistant.Core.Models
         public string Id { get; set; }
         public bool? Archived { get; set; }
         public bool? Open { get; set; }
+        public string DueBefore { get; set; }
+        public string DueAfter { get; set; }
         public override bool Equals(Object o)
         {
             var other = (TaskBoardResourceFilter)o;
             return
-                ((Name == null && other.Name == null) || (Name.Equals(other.Name))) &&
-                ((Id == null && other.Id == null) || (Id.Equals(other.Id))) &&
-                ((Archived == null && other.Archived == null) || (Archived.Equals(other.Archived)));
+                Name.NullCheckEquals(other.Name) &&
+                Id.NullCheckEquals(other.Id) &&
+                Archived.NullCheckEquals(other.Archived) &&
+                Open.NullCheckEquals(other.Open) &&
+                DueBefore.NullCheckEquals(other.DueBefore) &&
+                DueAfter.NullCheckEquals(other.DueAfter);
         }
 
         public override int GetHashCode()

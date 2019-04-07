@@ -139,5 +139,10 @@ namespace TaskBoardAssistant.Adapters.AzDO.Services
         {
             throw new NotImplementedException();
         }
+
+        public override Task<ITaskResource> GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

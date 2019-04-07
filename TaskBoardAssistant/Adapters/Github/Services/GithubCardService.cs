@@ -43,5 +43,10 @@ namespace TaskBoardAssistant.Adapters.Github.Services
         {
             return github.CommitResources();
         }
+
+        public override Task<ITaskResource> GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
