@@ -1,4 +1,4 @@
-image: Visual Studio 2017
+image: Ubuntu
 configuration: Release
 dotnet_csproj:
   patch: true
